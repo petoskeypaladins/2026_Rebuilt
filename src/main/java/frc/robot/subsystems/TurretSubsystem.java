@@ -75,15 +75,17 @@ public class TurretSubsystem extends SubsystemBase {
 
   public void setTurretSpeed(){
 if (resettinghigh == true){
-    if (Math.abs(m_turretEncoder.getPosition()) >= ( 0.25*turretLimit)){
+    if (Math.abs(m_turretEncoder.getPosition()) >= ( 0.25*turretLimit)){ //If the turret is in the lower 25% of its range, apply the slow down logic
 m_turretRotate.set(-0.3);
+    } else if (Math.abs(m_turretEncoder.getPosition()) >= (0.125*turretLimit)){ //If the turret is in the lower 50% of its range, apply the slow down logic
+      m_turretRotate.set(-0.1);
     } else {
-      m_turretRotate.set(0.3*(0-(m_turretEncoder.getPosition())));
-}
+      m_turretRotate.set(-0.01);
+
     
 if (m_turretEncoder.getPosition() <= 0){
 resettinghigh = false;
-
+}
 }}
 if (resettinglow == true){
   m_turretRotate.set(0.3);
