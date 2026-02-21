@@ -46,9 +46,9 @@ import java.util.List;
 public class RobotContainer {
   // The robot's subsystems
     public static final DriveSubsystem robotDrive = new DriveSubsystem();
-    private final TurretSubsystem TurretSubsystem = new TurretSubsystem();
-    private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-    private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+    public static final TurretSubsystem TurretSubsystem = new TurretSubsystem();
+    public static final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+    public static final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
 
   // The driver's controller
   public static XboxController driverController = new XboxController(OIConstants.kDriverControllerPort);
