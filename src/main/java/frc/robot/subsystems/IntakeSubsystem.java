@@ -9,35 +9,40 @@ import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 
 public class IntakeSubsystem extends SubsystemBase {
 
-  // private final SparkMax intake = new SparkMax(Constants.MechConstants.IntakeCanID, MotorType.kBrushless);
-  // private final RelativeEncoder m_intakeEncoder = m_intake.getEncoder();
-  // private final SparkClosedLoopController m_intakeController = m_intake.getClosedLoopController();
+  private final SparkMax intake = new SparkMax(Constants.MechConstants.IntakeCanID, MotorType.kBrushless);
+  private final RelativeEncoder m_intakeEncoder = intake.getEncoder();
+  private final SparkClosedLoopController m_intakeController = intake.getClosedLoopController();
 
   /** Creates a new IntakeSubsystem. */
   public IntakeSubsystem() {}
-  public boolean intakeRunning = false;
+
+  double intakeSpeed = 0;
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-  
-    if (RobotContainer.driverController.getRightBumperButtonPressed() == true) {
-      if (intakeRunning == true) {
-        intakeRunning = false;
-        // intake.set(0);
-        System.out.println("intake off :(");
-      } else {
-        intakeRunning = true;
-        // intake.set(0.5);
-        System.out.println("intake on!!");
-      }
-    };
+  intake.set(intakeSpeed);
 
+SmartDashboard.putNumber("IntakeSpeed", intakeSpeed);
+    if (intakeSpeed == 0){
+      if (RobotContainer.driverController.getLeftBumperButtonPressed() == true){
+        intakeSpeed = -0.5;
+      } else if(RobotContainer.driverController.getRightBumperButtonPressed() == true) {
+        intakeSpeed = 0.5;
+      }
+      
+    } else if ((RobotContainer.driverController.getLeftBumperButtonPressed()) || (RobotContainer.driverController.getRightBumperButtonPressed())){
+      intakeSpeed = 0;
+    }
+
+    
     
   }
 }

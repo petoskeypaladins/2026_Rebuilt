@@ -69,9 +69,12 @@ public final class Constants {
   public static final class MechConstants {
 
     public static final int turretRotateCanID = 51;   //change this later
-    // public static final int IntakeCanID = 49;         //change this later
+     public static final int IntakeCanID = 49;         //change this later
     public static final int ShooterTopCanID = 67;        //change this later
     public static final int ShooterBottomCanID = 69;     //change this later
+    public static final int SpindexerCanID = 68; 
+    public static final int KickerCanID = 66; 
+           //change this later
   }
 
   public static final class ModuleConstants {
