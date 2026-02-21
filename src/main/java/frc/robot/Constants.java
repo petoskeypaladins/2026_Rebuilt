@@ -115,4 +115,10 @@ public final class Constants {
   public static final class NeoMotorConstants {
     public static final double kFreeSpeedRpm = 5676;
   }
+  public static final class TurretConstants {
+  public static final int turretRotateCanID = 51;   //change this later
+  public static final double kTurretTransformInchesX = -5.0; // Adjust as needed
+  public static final double kTurretTransformInchesY = -7.975; // Adjust as needed
 }
+}
+

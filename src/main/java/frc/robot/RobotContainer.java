@@ -35,6 +35,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import java.util.List;
 
 
+
 /*
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -44,9 +45,8 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class RobotContainer {
   // The robot's subsystems
-    private final DriveSubsystem robotDrive = new DriveSubsystem();
+    public static final DriveSubsystem robotDrive = new DriveSubsystem();
     private final TurretSubsystem TurretSubsystem = new TurretSubsystem();
-    private final LimelightSubsystem LimelightSubsystem = new LimelightSubsystem(); // Removed: does not exist
     private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
     private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
 
@@ -78,8 +78,7 @@ TurretSubsystem.setDefaultCommand(
   TurretSubsystem.  setTurretSpeed(),
      TurretSubsystem));
 
-            
-            
+     
             
   }
 

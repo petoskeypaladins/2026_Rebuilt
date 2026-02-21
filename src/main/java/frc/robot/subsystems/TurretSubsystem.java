@@ -1,5 +1,9 @@
 package frc.robot.subsystems;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Transform2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.filter.SlewRateLimiter;
@@ -7,6 +11,13 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
+
+import edu.wpi.first.math.controller.ProfiledPIDController;
+
+import edu.wpi.first.math.trajectory.Trajectory;
+import edu.wpi.first.math.trajectory.TrajectoryConfig;
+import edu.wpi.first.math.trajectory.TrajectoryGenerator;
+// REV Robotics imports
 import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkBase.ControlType;
@@ -20,7 +31,7 @@ import frc.robot.Robot;
 import frc.robot.RobotContainer;
 
 
-@SuppressWarnings("unused")
+//@SuppressWarnings("unused")
 public class TurretSubsystem extends SubsystemBase {
   private final SparkMax m_turretRotate = new SparkMax(
       Constants.MechConstants.turretRotateCanID, MotorType.kBrushless);
@@ -107,8 +118,22 @@ m_turretRotate.set(0);
  }
 }}
 }
+
+public void turretTrackPose (Pose2d target)
+{
+    // Get robot pose with turret offset
+    Pose2d robotPose = RobotContainer.robotDrive.getPose();
+    // Apply turret offset to robot pose
+    Transform2d turretOffset = 
+      new Transform2d(
+        new Translation2d(Constants.TurretConstants.kTurretTransformInchesX / 39.37, Constants.TurretConstants.kTurretTransformInchesY / 39.37), 
+        new Rotation2d(0));
+    Pose2d turretPose = robotPose.plus(turretOffset);
+    
+    // Calculate angle to target
+    double turretAngle = turretPose.getRotation().getDegrees();
+   
 }
-
-
+}
 
   
