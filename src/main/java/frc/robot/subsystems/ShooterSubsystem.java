@@ -39,25 +39,31 @@ public class ShooterSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
     
     //spindexer and kicker
-    if (RobotContainer.operatorController.getPOV() == 270 && shooterRunning == true){
+    if (RobotContainer.operatorController.getRawButton(1) && shooterRunning == true){
         spindexerSpeed = SPINDEXER_POWER;
         kickerSpeed = KICKER_POWER;
 ;
-    } else if (RobotContainer.operatorController.getPOV() == 90 && shooterRunning == true){
-      spindexerSpeed = 0-SPINDEXER_POWER;
-      kickerSpeed = 0-KICKER_POWER;
+    } else if (RobotContainer.operatorController.getRawButton(2) && RobotContainer.operatorController.getRawButton(1) ){
+      spindexerSpeed = -0.5 * SPINDEXER_POWER; //Reduces power in reverse
+      kickerSpeed = -0.5 * KICKER_POWER;  //Reduces power in reverse
     } else {
       spindexerSpeed = 0;
       kickerSpeed = 0;
     }
 
-  if (RobotContainer.operatorController.getRawButton(1)) {
+  if ((RobotContainer.operatorController.getRawAxis(3)) <= (-0.8)) {
     shooterRunning = true;
   } else {
     shooterRunning = false;
+    shooterBottomSpeed = 0;
+    shooterTopSpeed = 0;
   }
 
-  
+  if (shooterRunning) {
+    //shoot according to math from limelight and pose2d
+  } else  {
+    //leave the motors running slightly for power draw
+  }
 
     SmartDashboard.putNumber("Spindexer speed", spindexerSpeed);
     SmartDashboard.putNumber("kicker Speed", kickerSpeed);

@@ -50,6 +50,8 @@ public class RobotContainer {
     public static final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
     public static final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
 
+   
+
   // The driver's controller
   public static XboxController driverController = new XboxController(OIConstants.kDriverControllerPort);
   public static Joystick operatorController = new Joystick(OIConstants.kOperatorControllerPort); 

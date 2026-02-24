@@ -26,6 +26,7 @@ import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.RelativeEncoder;
 import frc.robot.Constants;
+import frc.robot.Constants.TurretConstants;
 import frc.robot.LimelightHelpers;
 import frc.robot.Robot;
 import frc.robot.RobotContainer;
@@ -45,6 +46,8 @@ public class TurretSubsystem extends SubsystemBase {
      double turretLimit = 16;
      double turretRatio = 360 / 16.90; // <-- adjust as needed
   
+      public double m_robotRelativeAngle;
+     public double m_fieldRelativeAngle;
   
     /** Creates a new TurretSubsystem. */
     public TurretSubsystem() {
@@ -116,6 +119,25 @@ public void turretTrackPose (Pose2d target)
     SmartDashboard.putNumber("BotPose X", robotPose.getX());
     SmartDashboard.putNumber("BotPose Y", robotPose.getY());
     SmartDashboard.putNumber("BotPose Rotation", robotPose.getRotation().getDegrees());
+
+     
+    // Calculate vector to target
+    double dY = target.getY() - turretPose.getY();
+    double dX = target.getX() - turretPose.getX();
+    
+    // Calculate field-relative angle to target
+    Rotation2d fieldRelativeAngle = Rotation2d.fromRadians(Math.atan2(dY, dX));
+    
+    // Convert to robot-relative angle
+    Rotation2d robotRelativeAngle = fieldRelativeAngle.minus(robotPose.getRotation());
+
+    // Update angle variables
+    m_robotRelativeAngle = robotRelativeAngle.getDegrees();
+    m_fieldRelativeAngle = fieldRelativeAngle.getDegrees();
+    
+    // Command turret
+    this.setPivotPosition(robotRelativeAngle.getDegrees());
+  
 }
 }
 
