@@ -23,7 +23,7 @@ import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
-import frc.robot.subsystems.ManualTurretSubsystem;
+// import frc.robot.subsystems.ManualTurretSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TurretSubsystem;
 import frc.robot.subsystems.ClimbSubsystem;
@@ -54,7 +54,7 @@ public class RobotContainer {
     public static final TurretSubsystem TurretSubsystem = new TurretSubsystem();
     public static final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
     public static final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
-    public static final ManualTurretSubsystem ManualTurretSubsystem = new ManualTurretSubsystem();
+    // public static final ManualTurretSubsystem ManualTurretSubsystem = new ManualTurretSubsystem();
 
    
 
@@ -81,17 +81,9 @@ public class RobotContainer {
                 -MathUtil.applyDeadband(driverController.getRightX(), OIConstants.kDriveDeadband),
                 true),  robotDrive ));
              
-                      TurretSubsystem.setDefaultCommand(
-        new RunCommand(
-          () ->
-             //uh... that's not working. The problem is that it needs to reference it, but it dosen't exist.
-              TurretSubsystem.periodic()));
+                      
 
-    ManualTurretSubsystem.setDefaultCommand(
-        new RunCommand(
-          () ->
-              ManualTurretSubsystem.setTurretSpeed(),
-                  ManualTurretSubsystem));
+
 
 
 

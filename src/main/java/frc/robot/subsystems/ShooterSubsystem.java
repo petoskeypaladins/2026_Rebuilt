@@ -18,12 +18,13 @@ public class ShooterSubsystem extends SubsystemBase {
   private final SparkMax shooterTop = new SparkMax(Constants.MechConstants.ShooterTopCanID, MotorType.kBrushless);
   private final SparkMax spindexer = new SparkMax(Constants.MechConstants.SpindexerCanID, MotorType.kBrushless);
   private final SparkMax kicker = new SparkMax(Constants.MechConstants.KickerCanID, MotorType.kBrushless);
+  
 
   /** Creates a new IntakeSubsystem. */
   public ShooterSubsystem() {}
   public boolean shooterRunning = false;
 
-
+  
 
   double spindexerSpeed = 0;
   double kickerSpeed = 0;
@@ -34,11 +35,53 @@ public class ShooterSubsystem extends SubsystemBase {
   double SPINDEXER_POWER = 0.5;
   double KICKER_POWER = 0.5;
 
+double topmanualpower = 0;
+double bottommanualpower = 0;
+
   @Override
   public void periodic() {
 
     kicker.set(kickerSpeed);
     spindexer.set(spindexerSpeed);
+    shooterTop.set(shooterTopSpeed);
+    shooterBottom.set(shooterBottomSpeed);
+
+    //#region "Pipeline for computing shooter powers"
+    
+    double SHOOTER_BASE_POWER = 1 /*slow this down before you break something!!!*/ ;
+    //sets the master power of the shooter
+
+    double TOP_MULTIPLIER = 1;
+    double BOTTOM_MULTILPER = -1;
+    
+    
+    double DELIVEREDTOPPOWER = /*TOP_MULTIPLIER*SHOOTER_BASE_POWER*/ topmanualpower;
+    double DELIVEREDBOTTOMPOWER = /*BOTTOM_MULTILPER*SHOOTER_BASE_POWER*/ bottommanualpower;
+
+    //#endregion
+
+    //#region "manual powers: TEMPORARY!"
+    if (RobotContainer.operatorController.getRawButtonPressed(10)){
+      topmanualpower += 0.05;
+    }
+
+        if (RobotContainer.operatorController.getRawButtonPressed(12)){
+      topmanualpower -= 0.05;
+    }
+
+            if (RobotContainer.operatorController.getRawButtonPressed(9)){
+      bottommanualpower += 0.05;
+    }
+
+            if (RobotContainer.operatorController.getRawButtonPressed(11)){
+      bottommanualpower -= 0.05;
+    }
+
+    SmartDashboard.putNumber("Top manual power", topmanualpower);
+    SmartDashboard.putNumber("Bottom manual power", bottommanualpower);
+//#endregion
+
+
     // This method will be called once per scheduler run
     
     //spindexer and kicker
@@ -56,6 +99,8 @@ public class ShooterSubsystem extends SubsystemBase {
 
   if ((RobotContainer.operatorController.getRawAxis(3)) <= (-0.8)) {
     shooterRunning = true;
+    shooterTopSpeed = DELIVEREDTOPPOWER;
+    shooterBottomSpeed = DELIVEREDBOTTOMPOWER;
   } else {
     shooterRunning = false;
     shooterBottomSpeed = 0;
