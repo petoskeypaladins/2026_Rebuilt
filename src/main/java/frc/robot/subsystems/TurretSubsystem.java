@@ -1,3 +1,4 @@
+
 package frc.robot.subsystems;
 
 import edu.wpi.first.math.geometry.Pose2d;
@@ -31,13 +32,15 @@ import frc.robot.LimelightHelpers;
 import frc.robot.Robot;
 import frc.robot.RobotContainer;
 
-
-//@SuppressWarnings("unused")
+// @SuppressWarnings("unused")
 public class TurretSubsystem extends SubsystemBase {
-  private final SparkMax m_turretRotate = new SparkMax(
+
+  //#region Something in here breaks the code.
+  public static final SparkMax m_turretRotate = new SparkMax(
       Constants.MechConstants.turretRotateCanID, MotorType.kBrushless);
-  private final RelativeEncoder m_turretEncoder = m_turretRotate.getEncoder();
-  private final SparkClosedLoopController m_turretController = m_turretRotate.getClosedLoopController();
+  public static final RelativeEncoder m_turretEncoder = m_turretRotate.getEncoder();
+  public static final SparkClosedLoopController m_turretController = m_turretRotate.getClosedLoopController();
+  //m_turretController.setSetpoint(setPoint, ControlType.
     private double speed;
     private final SlewRateLimiter slewRateLimiter = new SlewRateLimiter(0.5); // Adjust rate as needed
     boolean resettinghigh = false;
@@ -49,7 +52,7 @@ public class TurretSubsystem extends SubsystemBase {
       public double m_robotRelativeAngle;
      public double m_fieldRelativeAngle;
   
-    /** Creates a new TurretSubsystem. */
+    //* Creates a new TurretSubsystem.
     public TurretSubsystem() {
 
     resetTurretEncoder();
@@ -89,7 +92,8 @@ public class TurretSubsystem extends SubsystemBase {
   
 
   public void setTurretSpeed(){
-    turretTrackPose(null);
+    Pose2d target = new Pose2d(0,0,new Rotation2d(0));
+    turretTrackPose(target);
   }
 
 public void turretTrackPose (Pose2d target)
@@ -101,15 +105,13 @@ public void turretTrackPose (Pose2d target)
       new Transform2d(
         new Translation2d(Constants.TurretConstants.kTurretTransformInchesX / 39.37, Constants.TurretConstants.kTurretTransformInchesY / 39.37), 
         new Rotation2d(0));
-    Pose2d turretPose =( robotPose.plus(turretOffset));
+        
+    Pose2d turretPose = ( robotPose.plus(turretOffset));
     
 
     double turretAngle = (turretPose.getRotation().getDegrees())+turretRatio * m_turretEncoder.getPosition();
 
-   System.out.println("turretAngle" + turretAngle);
-   System.out.println("RobotX" + robotPose.getX());
-   System.out.println("RobotY" + robotPose.getY());
-   System.out.println("RobotRotation" + robotPose.getRotation().getDegrees());
+
     SmartDashboard.putNumber("TurretAngle", turretAngle);
     SmartDashboard.putNumber("TurretOffsetX", turretOffset.getX());
     SmartDashboard.putNumber("TurretOffsetY", turretOffset.getY());
@@ -120,6 +122,8 @@ public void turretTrackPose (Pose2d target)
     SmartDashboard.putNumber("BotPose Y", robotPose.getY());
     SmartDashboard.putNumber("BotPose Rotation", robotPose.getRotation().getDegrees());
 
+
+
      
     // Calculate vector to target
     double dY = target.getY() - turretPose.getY();
@@ -127,18 +131,27 @@ public void turretTrackPose (Pose2d target)
     
     // Calculate field-relative angle to target
     Rotation2d fieldRelativeAngle = Rotation2d.fromRadians(Math.atan2(dY, dX));
-    
+
     // Convert to robot-relative angle
     Rotation2d robotRelativeAngle = fieldRelativeAngle.minus(robotPose.getRotation());
 
     // Update angle variables
     m_robotRelativeAngle = robotRelativeAngle.getDegrees();
     m_fieldRelativeAngle = fieldRelativeAngle.getDegrees();
-    
-    // Command turret
-    this.setPivotPosition(robotRelativeAngle.getDegrees());
-  
-}
-}
 
-  
+    SmartDashboard.putNumber("m_robotRelativeAngle", m_robotRelativeAngle);
+    SmartDashboard.putNumber("m_fieldRelativeAngle", m_fieldRelativeAngle);
+    // Command the turret
+
+    //Line 145 is *allegedly* the problem that causes the code to not enable. : (
+    //m_turretEncoder.setPosition(m_robotRelativeAngle*turretRatio);
+
+    
+    SmartDashboard.putNumber("Turret Target Position", m_turretEncoder.getPosition());
+    
+
+    //we need to convert the desired ankle of the turret to a position of the motor.
+    
+}
+//#endregion
+}

@@ -36,19 +36,22 @@ public class ShooterSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
+
+    kicker.set(kickerSpeed);
+    spindexer.set(spindexerSpeed);
     // This method will be called once per scheduler run
     
     //spindexer and kicker
     if (RobotContainer.operatorController.getRawButton(1) && shooterRunning == true){
         spindexerSpeed = SPINDEXER_POWER;
         kickerSpeed = KICKER_POWER;
-;
     } else if (RobotContainer.operatorController.getRawButton(2) && RobotContainer.operatorController.getRawButton(1) ){
       spindexerSpeed = -0.5 * SPINDEXER_POWER; //Reduces power in reverse
       kickerSpeed = -0.5 * KICKER_POWER;  //Reduces power in reverse
     } else {
       spindexerSpeed = 0;
       kickerSpeed = 0;
+
     }
 
   if ((RobotContainer.operatorController.getRawAxis(3)) <= (-0.8)) {

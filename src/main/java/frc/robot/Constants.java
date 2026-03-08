@@ -42,8 +42,8 @@ public final class Constants {
     // Angular offsets of the modules relative to the chassis in radians
     public static final double kFrontLeftChassisAngularOffset = -Math.PI / 2;
     public static final double kFrontRightChassisAngularOffset = 0;
-    public static final double kBackLeftChassisAngularOffset = Math.PI;
-    public static final double kBackRightChassisAngularOffset = Math.PI / 2;
+    public static final double kBackLeftChassisAngularOffset = Math.PI / 2;
+    public static final double kBackRightChassisAngularOffset = Math.PI;
 
     // SPARK MAX CAN IDs
 
@@ -69,13 +69,15 @@ public final class Constants {
   public static final class MechConstants {
 
     public static final int turretRotateCanID = 51;   //change this later
-     public static final int IntakeCanID = 49;         //change this later
-    public static final int ShooterTopCanID = 67;        //change this later
-    public static final int ShooterBottomCanID = 69;     //change this later
-    public static final int SpindexerCanID = 68; 
-    public static final int KickerCanID = 66; 
+     public static final int IntakeCanID = 61;         //change this later
+    public static final int ShooterTopCanID = 53;        //change this later
+    public static final int ShooterBottomCanID = 52;     //change this later
+    public static final int SpindexerCanID = 55; 
+    public static final int KickerCanID = 54; 
+    public static final int krakenPortID = 42;
            //change this later
-  }
+  }// 5x is equal to spindexer, kicker, bottome turret, top turret, and turret
+   
 
   public static final class ModuleConstants {
     // The MAXSwerve module can be configured with one of three pinion gears: 12T,
@@ -98,6 +100,7 @@ public final class Constants {
     public static final int kDriverControllerPort = 0;
     public static final int kOperatorControllerPort = 1;
     public static final double kDriveDeadband = 0.05;
+    //default deadband is 0.05
   }
 
   public static final class AutoConstants {

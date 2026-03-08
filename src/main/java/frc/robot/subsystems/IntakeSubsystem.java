@@ -30,7 +30,7 @@ public class IntakeSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
   intake.set(intakeSpeed);
 
-SmartDashboard.putNumber("IntakeSpeed", intakeSpeed);
+//SmartDashboard.putNumber("IntakeSpeed", intakeSpeed);
     if (intakeSpeed == 0){
       if (RobotContainer.driverController.getLeftBumperButtonPressed() == true){
         intakeSpeed = -0.5;
@@ -42,7 +42,6 @@ SmartDashboard.putNumber("IntakeSpeed", intakeSpeed);
       intakeSpeed = 0;
     }
 
-    
     
   }
 }

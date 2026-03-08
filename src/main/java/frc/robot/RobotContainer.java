@@ -23,8 +23,13 @@ import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.ManualTurretSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TurretSubsystem;
+import frc.robot.subsystems.ClimbSubsystem;
+
+
+
 // We don't need this rn.
 // import frc.robot.subsystems.limelightSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -42,13 +47,14 @@ import java.util.List;
  * periodic methods (other than the scheduler calls).  Instead, the structure of the robot
  * (including subsystems, commands, and button mappings) should be declared here.
  */
-@SuppressWarnings("unused")
+//@SuppressWarnings("unused")
 public class RobotContainer {
   // The robot's subsystems
     public static final DriveSubsystem robotDrive = new DriveSubsystem();
     public static final TurretSubsystem TurretSubsystem = new TurretSubsystem();
     public static final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
     public static final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+    public static final ManualTurretSubsystem ManualTurretSubsystem = new ManualTurretSubsystem();
 
    
 
@@ -74,15 +80,24 @@ public class RobotContainer {
                 -MathUtil.applyDeadband(driverController.getLeftX(), OIConstants.kDriveDeadband),
                 -MathUtil.applyDeadband(driverController.getRightX(), OIConstants.kDriveDeadband),
                 true),  robotDrive ));
-TurretSubsystem.setDefaultCommand(
-    new RunCommand(
-        () ->
-  TurretSubsystem.  setTurretSpeed(),
-     TurretSubsystem));
+             
+                      TurretSubsystem.setDefaultCommand(
+        new RunCommand(
+          () ->
+             //uh... that's not working. The problem is that it needs to reference it, but it dosen't exist.
+              TurretSubsystem.periodic()));
+
+    ManualTurretSubsystem.setDefaultCommand(
+        new RunCommand(
+          () ->
+              ManualTurretSubsystem.setTurretSpeed(),
+                  ManualTurretSubsystem));
+
+
 
      
-            
-  }
+          
+  } 
 
 
 /**
@@ -95,10 +110,10 @@ TurretSubsystem.setDefaultCommand(
    * {@link JoystickButton}.
    */
   private void configureButtonBindings() {
-    new JoystickButton(driverController, Button.kR1.value)
-        .whileTrue(new RunCommand(
-            () -> robotDrive.setX(),
-            robotDrive));
+    // new JoystickButton(driverController, Button.kR1.value)
+    //     .whileTrue(new RunCommand(
+    //         () -> robotDrive.setX(),
+    //         robotDrive));
 
     new JoystickButton(driverController, XboxController.Button.kStart.value)
         .onTrue(new InstantCommand(
