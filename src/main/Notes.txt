@@ -1,3 +1,16 @@
+
+uh oh! the robot drives robot oriented even though we want it field oriented. 
+
+list of things to try to diagnose the problem:
+
+•put the Boolean of robot oriented on the dashboard
+•make sure the gyro is returning a value (I don't think it is)
+•follow the logic and see where it goes
+•check last year's code
+
+
+
+
 public void turretTrackPose(Pose2d target) {
     // Get robot pose with turret offset
     Pose2d robotPose = m_DriveSubsystem.getState().Pose;
