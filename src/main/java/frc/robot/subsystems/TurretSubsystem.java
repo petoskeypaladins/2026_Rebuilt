@@ -51,8 +51,10 @@ public class TurretSubsystem extends SubsystemBase {
      private boolean wasEnabled = false;
      double turretLimit = 16;
      double turretRatio = 360 / 16.90; // <-- adjust as needed
+
+     
       
-      public double m_robotRelativeAngle;
+    public double m_robotRelativeAngle;
      public double m_fieldRelativeAngle;
   
     //* Creates a new TurretSubsystem.
@@ -76,6 +78,9 @@ public class TurretSubsystem extends SubsystemBase {
            resettinghigh = false;
            resettinglow = false;
        }
+
+      
+
       wasEnabled = isEnabled;
   
   if (m_turretEncoder.getPosition() >= turretLimit ) {
@@ -118,7 +123,7 @@ if (resettinghigh == false && resettinglow == false) {
 
   public void setTurretSpeed(double speed){
    turretRotate.set(speed);
-
+//This line is critical. It is commented out right now so they can test the shooter powers.
   }
 
 

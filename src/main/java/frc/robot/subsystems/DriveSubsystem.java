@@ -4,6 +4,10 @@
 
 package frc.robot.subsystems;
 
+import java.io.IOException;
+
+import org.json.simple.parser.ParseException;
+
 import edu.wpi.first.hal.FRCNetComm.tInstances;
 import edu.wpi.first.hal.FRCNetComm.tResourceType;
 import edu.wpi.first.hal.HAL;
@@ -16,6 +20,7 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.ADIS16470_IMU.IMUAxis;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.LimelightHelpers;
@@ -24,6 +29,10 @@ import frc.robot.Constants.DriveConstants;
 import frc.robot.LimelightHelpers.LimelightResults;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.config.PIDConstants;
+import com.pathplanner.lib.config.RobotConfig;
+
 
 public class DriveSubsystem extends SubsystemBase {
   // Create MAXSwerveModules
@@ -50,6 +59,9 @@ public class DriveSubsystem extends SubsystemBase {
   // The gyro sensor
   private final ADIS16470_IMU m_gyro = new ADIS16470_IMU();
 
+  //Speed multiplier for slow modes
+  double speedmultiplier = 1;
+  boolean forceslowmode = false;
 
 
   // Odometry class for tracking robot pose
@@ -67,10 +79,56 @@ public class DriveSubsystem extends SubsystemBase {
   public DriveSubsystem() {
     // Usage reporting for MAXSwerve template
     HAL.report(tResourceType.kResourceType_RobotDrive, tInstances.kRobotDriveSwerve_MaxSwerve);
+  // Usage reporting for MAXSwerve template
+    HAL.report(tResourceType.kResourceType_RobotDrive, tInstances.kRobotDriveSwerve_MaxSwerve);
+     RobotConfig config = null;
+
+    try {
+      config = RobotConfig.fromGUISettings();
+    }
+     catch (IOException | ParseException e)  {
+      // Auto-generated catch block
+      e.printStackTrace();
+     }
+
+
+
+    AutoBuilder.configure(
+            this::getPose, // Robot pose supplier
+            this::resetOdometry, // Method to reset odometry (will be called if your auto has a starting pose)
+            this::getRobotRelativeSpeeds,
+            (speeds, feedforwards) -> driveRobotRelative(speeds), // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
+           // this::drive, // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds
+           DriveConstants.pathconfig,
+           config,
+            () -> {
+              // Boolean supplier that controls when the path will be mirrored for the red alliance
+              // This will flip the path being followed to the red side of the field.
+              // THE ORIGIN WILL REMAIN ON THE BLUE SIDE
+
+              var alliance = DriverStation.getAlliance();
+              if (alliance.isPresent()) {
+                return alliance.get() == DriverStation.Alliance.Red;
+              }
+              return false;
+            },
+            
+            this);  // Reference to this subsystem to set requirements
+            
   }
 
   @Override
   public void periodic() {
+
+    SmartDashboard.putNumber("robot heading", m_gyro.getAngle(IMUAxis.kZ));
+
+    //     if ((ShooterSubsystem.shooterTop.getAppliedOutput() != 0) || (ShooterSubsystem.shooterBottom.getAppliedOutput() != 0)){
+    //   forceslowmode = true;
+    // } else {
+    //   forceslowmode = false;
+    // }
+
+
     // Update the odometry in the periodic block
     m_odometry.update(
         Rotation2d.fromDegrees(m_gyro.getAngle(IMUAxis.kZ)),
@@ -80,6 +138,13 @@ public class DriveSubsystem extends SubsystemBase {
             m_rearLeft.getPosition(),
             m_rearRight.getPosition()
         });
+      if (forceslowmode == true)
+      //slow mode control
+      if (RobotContainer.operatorController.getRawAxis(2) > 0 )  {
+        /*  speedmultiplier = 0.5**/ RobotContainer.operatorController.getRawAxis(2);
+      } else {
+        /* speedmultiplier  = 1; */
+      }
   }
   
 
@@ -120,9 +185,9 @@ public class DriveSubsystem extends SubsystemBase {
    */
   public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative) {
     // Convert the commanded speeds into the correct units for the drivetrain
-    double xSpeedDelivered = xSpeed * DriveConstants.kMaxSpeedMetersPerSecond;
-    double ySpeedDelivered = ySpeed * DriveConstants.kMaxSpeedMetersPerSecond;
-    double rotDelivered = rot * DriveConstants.kMaxAngularSpeed;
+    double xSpeedDelivered = xSpeed * DriveConstants.kMaxSpeedMetersPerSecond * speedmultiplier;
+    double ySpeedDelivered = ySpeed * DriveConstants.kMaxSpeedMetersPerSecond * speedmultiplier;
+    double rotDelivered = rot * DriveConstants.kMaxAngularSpeed /** speedmultiplier*/;
 
     var swerveModuleStates = DriveConstants.kDriveKinematics.toSwerveModuleStates(
         fieldRelative
@@ -135,6 +200,20 @@ public class DriveSubsystem extends SubsystemBase {
     m_frontRight.setDesiredState(swerveModuleStates[1]);
     m_rearLeft.setDesiredState(swerveModuleStates[2]);
     m_rearRight.setDesiredState(swerveModuleStates[3]);
+  }
+
+  public void driveRobotRelative(ChassisSpeeds speeds) {
+    var swerveModuleStates = 
+      DriveConstants.kDriveKinematics.toSwerveModuleStates(speeds);
+    SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, DriveConstants.kMaxSpeedMetersPerSecond);
+    m_frontLeft.setDesiredState(swerveModuleStates[0]);
+    m_frontRight.setDesiredState(swerveModuleStates[1]);
+    m_rearLeft.setDesiredState(swerveModuleStates[2]);
+    m_rearRight.setDesiredState(swerveModuleStates[3]);
+  }
+
+    public ChassisSpeeds getRobotRelativeSpeeds() {
+    return DriveConstants.kDriveKinematics.toChassisSpeeds(m_frontLeft.getState(), m_frontRight.getState(), m_rearLeft.getState(), m_rearRight.getState());
   }
 
   /**
@@ -181,6 +260,7 @@ public class DriveSubsystem extends SubsystemBase {
    */
   public double getHeading() {
     return Rotation2d.fromDegrees(m_gyro.getAngle(IMUAxis.kZ)).getDegrees();
+
 
   }
 

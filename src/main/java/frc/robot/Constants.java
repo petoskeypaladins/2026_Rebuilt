@@ -4,6 +4,9 @@
 
 package frc.robot;
 
+import com.pathplanner.lib.config.PIDConstants;
+import com.pathplanner.lib.controllers.PPHolonomicDriveController;
+
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
@@ -27,6 +30,11 @@ public final class Constants {
     // the robot, rather the allowed maximum speeds
     public static final double kMaxSpeedMetersPerSecond = 4.8;
     public static final double kMaxAngularSpeed = 2 * Math.PI; // radians per second
+     public static PPHolonomicDriveController pathconfig = new PPHolonomicDriveController(
+      new PIDConstants(1.0, 0, 0), // Translation PID constants
+      new PIDConstants(1.0,0,0) // Rotation PID constants
+    );
+  
 
     // Chassis configuration
     public static final double kTrackWidth = Units.inchesToMeters(26.5);
@@ -42,8 +50,8 @@ public final class Constants {
     // Angular offsets of the modules relative to the chassis in radians
     public static final double kFrontLeftChassisAngularOffset = -Math.PI / 2;
     public static final double kFrontRightChassisAngularOffset = 0;
-    public static final double kBackLeftChassisAngularOffset = Math.PI / 2;
-    public static final double kBackRightChassisAngularOffset = Math.PI;
+    public static final double kBackLeftChassisAngularOffset = Math.PI;
+    public static final double kBackRightChassisAngularOffset = Math.PI / 2;
 
     // SPARK MAX CAN IDs
 
@@ -52,18 +60,18 @@ public final class Constants {
      * 
      */
     public static final int kFrontLeftDrivingCanId = 11;
-    public static final int kRearLeftDrivingCanId = 41;
+    public static final int kRearLeftDrivingCanId = 31;
     public static final int kFrontRightDrivingCanId = 21;
-    public static final int kRearRightDrivingCanId = 31;
+    public static final int kRearRightDrivingCanId = 41;
 
     public static final int kFrontLeftTurningCanId = 12;
-    public static final int kRearLeftTurningCanId = 42;
+    public static final int kRearLeftTurningCanId = 32;
     public static final int kFrontRightTurningCanId = 22;
-    public static final int kRearRightTurningCanId = 32;
+    public static final int kRearRightTurningCanId = 42;
 
     
 
-    public static final boolean kGyroReversed = false;
+    public static final boolean kGyroReversed = true;
   }
   
   public static final class MechConstants {
