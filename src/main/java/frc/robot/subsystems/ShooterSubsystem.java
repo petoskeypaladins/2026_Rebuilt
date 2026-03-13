@@ -6,10 +6,12 @@ import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.SparkMax;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
+
 
 @SuppressWarnings("unused")
 public class ShooterSubsystem extends SubsystemBase {
@@ -24,7 +26,7 @@ public class ShooterSubsystem extends SubsystemBase {
   public ShooterSubsystem() {}
   public boolean shooterRunning = false;
 
-  
+  boolean testMode;
 
   double spindexerSpeed = 0;
   double kickerSpeed = 0;
@@ -32,24 +34,39 @@ public class ShooterSubsystem extends SubsystemBase {
   double shooterBottomSpeed = 0;
 
   //Change these when testing speed
-  double SPINDEXER_POWER = 0.5;
-  double KICKER_POWER = 1;
+  double SPINDEXER_POWER = 0.4;
+  double KICKER_POWER = 0.95;
 
-double topmanualpower = 0;
-double bottommanualpower = 0;
-double kickermanualpower = 0;
+double topManualPower = 0;
+double bottomManualPower = 0;
+double kickerManualPower = 0;
 
-public boolean forceslowmode = false;
+public boolean forceSlowMode = false;
 
   @Override
   public void periodic() {
 
 
+    if (RobotContainer.operatorController.getRawButtonPressed(6)){
+      if (testMode == false){
+        testMode = true;
+      } else {
+        testMode = false;
+      }
 
+    }
+    SmartDashboard.putBoolean("testMode", testMode);
+    if (testMode) {
+       kicker.set(kickerManualPower);
+    spindexer.set(spindexerSpeed);
+    shooterTop.set(topManualPower);
+    shooterBottom.set(bottomManualPower);
+    } else {
     kicker.set(kickerSpeed);
     spindexer.set(spindexerSpeed);
     shooterTop.set(shooterTopSpeed);
     shooterBottom.set(shooterBottomSpeed);
+    }
 
 
     //#region "Pipeline for computing shooter powers"
@@ -58,43 +75,44 @@ public boolean forceslowmode = false;
     //sets the master power of the shooter
 
     double TOP_MULTIPLIER = 1;
-    double BOTTOM_MULTILPER = -1;
+    double BOTTOM_MULTILPER = 1;
     
+
     
-    double DELIVEREDTOPPOWER = TOP_MULTIPLIER*SHOOTER_BASE_POWER;
-    double DELIVEREDBOTTOMPOWER = BOTTOM_MULTILPER*SHOOTER_BASE_POWER ;
+    double DELIVEREDTOPPOWER = TOP_MULTIPLIER * SHOOTER_BASE_POWER;
+    double DELIVEREDBOTTOMPOWER = -BOTTOM_MULTILPER * SHOOTER_BASE_POWER ;
 
     //#endregion
 
     //#region "manual powers: TEMPORARY!"
     if (RobotContainer.operatorController.getRawButtonPressed(10)){
-      topmanualpower += 0.05;
+      topManualPower += 0.0025;
     }
 
         if (RobotContainer.operatorController.getRawButtonPressed(12)){
-      topmanualpower -= 0.05;
+      topManualPower -= 0.0025;
     }
 
             if (RobotContainer.operatorController.getRawButtonPressed(9)){
-      bottommanualpower += 0.05;
+      bottomManualPower += 0.0025;
     }
 
             if (RobotContainer.operatorController.getRawButtonPressed(11)){
-      bottommanualpower -= 0.05;
+      bottomManualPower -= 0.025;
     }
 
           if (RobotContainer.operatorController.getRawButtonPressed(5)){
-            kickermanualpower += 0.05;
+            kickerManualPower += 0.0025;
           }
 
           if (RobotContainer.operatorController.getRawButtonPressed(3)){
-            kickermanualpower -= 0.05;
+            kickerManualPower -= 0.0025;
           }
 
 
-    SmartDashboard.putNumber("Top manual power", Math.round(topmanualpower));
-    SmartDashboard.putNumber("Bottom manual power", Math.round(bottommanualpower));
-    SmartDashboard.putNumber("Kicker manual power", Math.round(kickermanualpower));
+    SmartDashboard.putNumber("Top manual power", topManualPower);
+    SmartDashboard.putNumber("Bottom manual power", bottomManualPower);
+    SmartDashboard.putNumber("Kicker manual power", kickerManualPower);
 //#endregion
 
 

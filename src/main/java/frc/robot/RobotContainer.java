@@ -24,11 +24,13 @@ import edu.wpi.first.wpilibj.PS4Controller.Button;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
+import frc.robot.commands.ShooterOne;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
 // import frc.robot.subsystems.ManualTurretSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TurretSubsystem;
+import frc.robot.subsystems.limelightSubsystem;
 import frc.robot.subsystems.ClimbSubsystem;
 
 
@@ -36,9 +38,13 @@ import frc.robot.subsystems.ClimbSubsystem;
 // We don't need this rn.
 // import frc.robot.subsystems.limelightSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import java.io.IOException;
@@ -66,10 +72,11 @@ public class RobotContainer {
     public static final TurretSubsystem TurretSubsystem = new TurretSubsystem();
     public static final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
     public static final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+    public static final limelightSubsystem LimeLightSubsystem = new limelightSubsystem();
 
     // public static final ManualTurretSubsystem ManualTurretSubsystem = new ManualTurretSubsystem();
 
-   
+   public static final ShooterOne ShooterOne = new ShooterOne();
 
   // The driver's controller
   public static XboxController driverController = new XboxController(OIConstants.kDriverControllerPort);
@@ -80,6 +87,8 @@ public class RobotContainer {
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
+
+    
 
       //ZPaths 
     NamedCommands.registerCommand("New Path", autonPath("New Path"));
@@ -101,8 +110,12 @@ public class RobotContainer {
                 -MathUtil.applyDeadband(driverController.getRightX(), OIConstants.kDriveDeadband),
                 true), 
               robotDrive ));
-
+        
+              LimeLightSubsystem.setDefaultCommand(
+                new ShooterOne()
+              );
   } 
+
 
 
 
@@ -121,14 +134,6 @@ public class RobotContainer {
     //     .whileTrue(new RunCommand(
     //         () -> robotDrive.setX(),
     //         robotDrive));
-
-    new JoystickButton(driverController, XboxController.Button.kStart.value)
-        .onTrue(new InstantCommand(
-            () -> robotDrive.zeroHeading(),
-            robotDrive));
-
-
-
 
 
   }
