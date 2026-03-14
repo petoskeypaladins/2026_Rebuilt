@@ -4,6 +4,9 @@
 
 package frc.robot;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.pathplanner.lib.config.PIDConstants;
 import com.pathplanner.lib.controllers.PPHolonomicDriveController;
 
@@ -35,6 +38,7 @@ public final class Constants {
       new PIDConstants(1.0,0,0) // Rotation PID constants
     );
   
+
 
     // Chassis configuration
     public static final double kTrackWidth = Units.inchesToMeters(26.5);
@@ -71,7 +75,7 @@ public final class Constants {
 
     
 
-    public static final boolean kGyroReversed = true;
+    public static final boolean kGyroReversed = false;
   }
   
   public static final class MechConstants {
@@ -134,5 +138,13 @@ public final class Constants {
   public static final double kTurretTransformInchesX = -5.0; // Adjust as needed
   public static final double kTurretTransformInchesY = -7.975; // Adjust as needed
 }
+
+
+public static final class TagConstants {
+
+  //valid april tags (the ones on the hub) for each alliance
+  public static List <Number> redTags = List.of(4,3,9,10, 8, 5, 11, 2);
+  public static List <Number> blueTags = List.of(19,20,26,25,18,27,21,24);
 }
 
+}

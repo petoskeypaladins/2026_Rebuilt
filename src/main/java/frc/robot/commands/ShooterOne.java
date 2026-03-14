@@ -7,6 +7,10 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
+import frc.robot.LimelightHelpers.LimelightResults;
+import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.limelightSubsystem;
+import java.util.*;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class ShooterOne extends Command {
@@ -16,24 +20,74 @@ public class ShooterOne extends Command {
     addRequirements(RobotContainer.shooterSubsystem);
     addRequirements(RobotContainer.LimeLightSubsystem);
 
+    
   }
+
+  public boolean shooterRunning = true;
+  public String ABtesting = "A";
+  public String Adescription = "none";
+  public String Bdescription = "none";
+  public String CurrentDescription = "null";
+
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-  
+    shooterRunning = true;
     SmartDashboard.putNumber("Limelight TY",RobotContainer.LimeLightSubsystem.ty);
+    SmartDashboard.putNumber("Shooter top speed", RobotContainer.shooterSubsystem.shooterTop.get());
+    SmartDashboard.putNumber("Shooter bottom speed",RobotContainer.shooterSubsystem.shooterBottom.get());
+    SmartDashboard.putString("AB testing", ABtesting);
+    SmartDashboard.putString("Description", CurrentDescription);
+    
+    //AB testing
+    if (RobotContainer.operatorController.getRawButtonPressed(4)){
+      if (ABtesting == "A"){
+        ABtesting = "B";
+      } else {
+        ABtesting = "A";
+      }
+    }
+
+    if (ABtesting == "A"){
+      CurrentDescription = Adescription;
+    }
+
+    if (ABtesting == "B"){
+      CurrentDescription = Bdescription;
+    }
+
+
+    double ty = RobotContainer.LimeLightSubsystem.ty;
+    if (ty != 0){
+    
+      if (ABtesting == "A"){
+      Adescription = "linear";
+     RobotContainer.shooterSubsystem.shooterTop.set(-0.034*ty+0.453);
+     RobotContainer.shooterSubsystem.shooterBottom.set(0.011*ty-0.548);
+      } else {
+      Bdescription = "cubic";
+      RobotContainer.shooterSubsystem.shooterTop.set(-0.000205039*ty*ty*ty+0.00695272*ty*ty-0.0932683*ty+0.568311);
+      RobotContainer.shooterSubsystem.shooterBottom.set(-(0.000292744*ty*ty*ty+0.0081225*ty*ty-0.0727252*ty+0.658441));
+      }
+    }
+
     
   }
 
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    shooterRunning = false;
+    RobotContainer.shooterSubsystem.shooterTop.set(0.1);
+    RobotContainer.shooterSubsystem.shooterBottom.set(-0.1);
+  }
 
   // Returns true when the command should end.
   @Override

@@ -24,6 +24,7 @@ import edu.wpi.first.wpilibj.PS4Controller.Button;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
+import frc.robot.commands.DriveCommand;
 import frc.robot.commands.ShooterOne;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -45,6 +46,8 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SwerveControllerCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import java.io.IOException;
@@ -76,11 +79,15 @@ public class RobotContainer {
 
     // public static final ManualTurretSubsystem ManualTurretSubsystem = new ManualTurretSubsystem();
 
-   public static final ShooterOne ShooterOne = new ShooterOne();
+    //Robot Commands
+    public static final DriveCommand driveCommand = new DriveCommand();
+    public static final ShooterOne ShooterOne = new ShooterOne();
 
   // The driver's controller
   public static XboxController driverController = new XboxController(OIConstants.kDriverControllerPort);
   public static Joystick operatorController = new Joystick(OIConstants.kOperatorControllerPort); 
+  public static CommandXboxController m_commandXboxController = new CommandXboxController(OIConstants.kDriverControllerPort);
+  public static CommandJoystick m_OperatorController = new CommandJoystick(OIConstants.kOperatorControllerPort);
 
   private final SendableChooser<Command> autoChooser;
   /**
@@ -99,6 +106,7 @@ public class RobotContainer {
     autoChooser = AutoBuilder.buildAutoChooser();
     SmartDashboard.putData("Select Auto", autoChooser);
 
+   // new RunCommand(() -> , null)
     // Configure default commands
     robotDrive.setDefaultCommand(
         // The left stick controls translation of the robot.
@@ -107,14 +115,15 @@ public class RobotContainer {
             () -> robotDrive.drive(
                 -MathUtil.applyDeadband(driverController.getLeftY(), OIConstants.kDriveDeadband),
                 -MathUtil.applyDeadband(driverController.getLeftX(), OIConstants.kDriveDeadband),
-                -MathUtil.applyDeadband(driverController.getRightX(), OIConstants.kDriveDeadband),
+                MathUtil.applyDeadband(driverController.getRightX(), OIConstants.kDriveDeadband),
                 true), 
               robotDrive ));
         
               LimeLightSubsystem.setDefaultCommand(
                 new ShooterOne()
               );
-  } 
+
+  }
 
 
 
@@ -134,7 +143,14 @@ public class RobotContainer {
     //     .whileTrue(new RunCommand(
     //         () -> robotDrive.setX(),
     //         robotDrive));
+      m_commandXboxController.pov(180).whileTrue(
+        new RunCommand(
+          () -> robotDrive.zeroHeading(), robotDrive)
+      );
 
+      m_OperatorController.axisLessThan(3, 0.8).whileTrue(
+        ShooterOne
+      );
 
   }
 

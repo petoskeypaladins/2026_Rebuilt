@@ -20,6 +20,7 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.ADIS16470_IMU;
 import edu.wpi.first.wpilibj.ADIS16470_IMU.IMUAxis;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -58,6 +59,8 @@ public class DriveSubsystem extends SubsystemBase {
 
   // The gyro sensor
   public final ADIS16470_IMU m_gyro = new ADIS16470_IMU();
+
+
 
   //Speed multiplier for slow modes
   double speedmultiplier = 1;
@@ -187,11 +190,26 @@ public class DriveSubsystem extends SubsystemBase {
 
    boolean fieldRelative = true;
   public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative) {
+   
+    if (RobotContainer.driverController.getLeftTriggerAxis() > 0){
+      speedmultiplier = RobotContainer.driverController.getLeftTriggerAxis();
+    }   else if (RobotContainer.operatorController.getRawButton(1)){
+      speedmultiplier = 0.5;
+      RobotContainer.driverController.setRumble(RumbleType.kBothRumble, 1);
+    } else {
+      speedmultiplier = 1;
+      RobotContainer.driverController.setRumble(RumbleType.kBothRumble, 0);
+    }
+
     // Convert the commanded speeds into the correct units for the drivetrain
     double xSpeedDelivered = xSpeed * DriveConstants.kMaxSpeedMetersPerSecond * speedmultiplier;
     double ySpeedDelivered = ySpeed * DriveConstants.kMaxSpeedMetersPerSecond * speedmultiplier;
-    double rotDelivered = rot * DriveConstants.kMaxAngularSpeed * speedmultiplier;
+    double rotDelivered = -rot * DriveConstants.kMaxAngularSpeed * speedmultiplier;
 
+      SmartDashboard.putNumber("speed multiplier", speedmultiplier);
+      SmartDashboard.putNumber("delivered X", xSpeedDelivered);
+      SmartDashboard.putNumber("delivered y", ySpeedDelivered);
+      SmartDashboard.putNumber("delivered rotation", rotDelivered);
     var swerveModuleStates = DriveConstants.kDriveKinematics.toSwerveModuleStates(
         fieldRelative
             ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeedDelivered, ySpeedDelivered, rotDelivered,

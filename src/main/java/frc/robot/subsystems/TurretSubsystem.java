@@ -107,7 +107,7 @@ public class TurretSubsystem extends SubsystemBase {
   }
 
 if (resettinghigh == false && resettinglow == false) {
-  setTurretSpeed(RobotContainer.operatorController.getRawAxis(2) * 0.3);
+  //setTurretSpeed(RobotContainer.operatorController.getRawAxis(2) * 0.3);
 } else {
   if (resettinghigh == true)  {
       setTurretSpeed(-0.1);

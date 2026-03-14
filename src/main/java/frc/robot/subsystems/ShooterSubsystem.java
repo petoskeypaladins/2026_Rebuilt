@@ -16,22 +16,21 @@ import frc.robot.RobotContainer;
 @SuppressWarnings("unused")
 public class ShooterSubsystem extends SubsystemBase {
 
-  public static final SparkMax shooterBottom = new SparkMax(Constants.MechConstants.ShooterBottomCanID, MotorType.kBrushless);
-  public static final SparkMax shooterTop = new SparkMax(Constants.MechConstants.ShooterTopCanID, MotorType.kBrushless);
+  public final SparkMax shooterBottom = new SparkMax(Constants.MechConstants.ShooterBottomCanID, MotorType.kBrushless);
+  public final SparkMax shooterTop = new SparkMax(Constants.MechConstants.ShooterTopCanID, MotorType.kBrushless);
   private final SparkMax spindexer = new SparkMax(Constants.MechConstants.SpindexerCanID, MotorType.kBrushless);
   private final SparkMax kicker = new SparkMax(Constants.MechConstants.KickerCanID, MotorType.kBrushless);
   
 
   /** Creates a new IntakeSubsystem. */
   public ShooterSubsystem() {}
-  public boolean shooterRunning = false;
+  //public boolean shooterRunning = false;
 
   boolean testMode;
 
   double spindexerSpeed = 0;
   double kickerSpeed = 0;
-  double shooterTopSpeed = 0;
-  double shooterBottomSpeed = 0;
+
 
   //Change these when testing speed
   double SPINDEXER_POWER = 0.4;
@@ -64,37 +63,23 @@ public boolean forceSlowMode = false;
     } else {
     kicker.set(kickerSpeed);
     spindexer.set(spindexerSpeed);
-    shooterTop.set(shooterTopSpeed);
-    shooterBottom.set(shooterBottomSpeed);
+    // shooterTop.set(shooterTopSpeed);
+    // shooterBottom.set(shooterBottomSpeed);
+
     }
 
-
-    //#region "Pipeline for computing shooter powers"
-    
-    double SHOOTER_BASE_POWER = 0.4 /*slow this down before you break something!!!*/ ;
-    //sets the master power of the shooter
-
-    double TOP_MULTIPLIER = 1;
-    double BOTTOM_MULTILPER = 1;
-    
-
-    
-    double DELIVEREDTOPPOWER = TOP_MULTIPLIER * SHOOTER_BASE_POWER;
-    double DELIVEREDBOTTOMPOWER = -BOTTOM_MULTILPER * SHOOTER_BASE_POWER ;
-
-    //#endregion
 
     //#region "manual powers: TEMPORARY!"
     if (RobotContainer.operatorController.getRawButtonPressed(10)){
-      topManualPower += 0.0025;
+      topManualPower += 0.025;
     }
 
         if (RobotContainer.operatorController.getRawButtonPressed(12)){
-      topManualPower -= 0.0025;
+      topManualPower -= 0.025;
     }
 
             if (RobotContainer.operatorController.getRawButtonPressed(9)){
-      bottomManualPower += 0.0025;
+      bottomManualPower += 0.025;
     }
 
             if (RobotContainer.operatorController.getRawButtonPressed(11)){
@@ -102,11 +87,11 @@ public boolean forceSlowMode = false;
     }
 
           if (RobotContainer.operatorController.getRawButtonPressed(5)){
-            kickerManualPower += 0.0025;
+            kickerManualPower += 0.025;
           }
 
           if (RobotContainer.operatorController.getRawButtonPressed(3)){
-            kickerManualPower -= 0.0025;
+            kickerManualPower -= 0.025;
           }
 
 
@@ -119,7 +104,7 @@ public boolean forceSlowMode = false;
     // This method will be called once per scheduler run
     
     //spindexer and kicker
-    if (RobotContainer.operatorController.getRawButton(1) && shooterRunning == true){
+    if (RobotContainer.operatorController.getRawButton(1) && RobotContainer.ShooterOne.shooterRunning == true){
         spindexerSpeed = SPINDEXER_POWER;
         kickerSpeed = KICKER_POWER;
     } else if (RobotContainer.operatorController.getRawButton(2) && RobotContainer.operatorController.getRawButton(1) ){
@@ -131,26 +116,8 @@ public boolean forceSlowMode = false;
 
     }
 
-  if ((RobotContainer.operatorController.getRawAxis(3)) <= (-0.8)) {
-    shooterRunning = true;
-    shooterTopSpeed = DELIVEREDTOPPOWER;
-    shooterBottomSpeed = DELIVEREDBOTTOMPOWER;
-  } else {
-    shooterRunning = false;
-    shooterBottomSpeed = 0;
-    shooterTopSpeed = 0;
-  }
-
-  if (shooterRunning) {
-    //shoot according to math from limelight and pose2d
-  } else  {
-    //leave the motors running slightly for power draw
-  }
-
     SmartDashboard.putNumber("Spindexer speed", spindexerSpeed);
     SmartDashboard.putNumber("kicker Speed", kickerSpeed);
-    SmartDashboard.putNumber("Shooter top speed", shooterTopSpeed);
-    SmartDashboard.putNumber("Shooter bottom speed", shooterBottomSpeed);
 
 
     }
