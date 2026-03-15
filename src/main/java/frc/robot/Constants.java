@@ -86,10 +86,15 @@ public final class Constants {
     public static final int ShooterBottomCanID = 52;     //change this later
     public static final int SpindexerCanID = 55; 
     public static final int KickerCanID = 54; 
-    public static final int krakenPortID = 42;
+
+
            //change this later
   }// 5x is equal to spindexer, kicker, bottome turret, top turret, and turret
    
+  public static final class ClimbConstants {
+    public static final int krakenPortID = 42;
+    public static final int limitSwitchPort = 0;
+  }
 
   public static final class ModuleConstants {
     // The MAXSwerve module can be configured with one of three pinion gears: 12T,

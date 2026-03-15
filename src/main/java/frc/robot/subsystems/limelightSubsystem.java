@@ -57,13 +57,13 @@ NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
    ta = table.getEntry("ta").getDouble(0.0);
    tid = table.getEntry("tid").getDouble(ta);
 
-    SmartDashboard.putNumber("Limelight TX", tx);
+    SmartDashboard.putNumber("Limelight/Limelight TX", tx);
    // SmartDashboard.putNumber("Limelight TY", ty);
-    SmartDashboard.putNumber("Limelight TA", ta);
-    SmartDashboard.putNumber("Limelight TID", tid);
-    SmartDashboard.putBoolean("Is that a good april tag?", goodtag);
+    SmartDashboard.putNumber("Limelight/Limelight TA", ta);
+    SmartDashboard.putNumber("Limelight/Limelight TID", tid);
+    SmartDashboard.putBoolean("Limelight/Is that a good april tag?", goodtag);
     //SmartDashboard.putString("April tag whitelist", validTags.toString());
-    SmartDashboard.putBoolean("Are the april tags filtered by alliance?", areTagsFiletered);
+    SmartDashboard.putBoolean("Limelight/Are the april tags filtered by alliance?", areTagsFiletered);
 
     //if (validTags.contains(tid)){
     //  goodtag = true;

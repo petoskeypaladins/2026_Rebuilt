@@ -24,6 +24,7 @@ import edu.wpi.first.wpilibj.PS4Controller.Button;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
+import frc.robot.commands.ClimbCommand;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.ShooterOne;
 import frc.robot.subsystems.DriveSubsystem;
@@ -49,7 +50,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-
+import com.revrobotics.spark.config.LimitSwitchConfig;
 import java.io.IOException;
 import java.util.List;
 
@@ -69,6 +70,11 @@ import com.pathplanner.lib.path.PathPlannerPath;
  */
 //@SuppressWarnings("unused")
 public class RobotContainer {
+    
+    public static boolean climbBottomedOut;
+
+    //up is positive, down is negative
+    public static String climbState = "idk";
 
   // The robot's subsystems
     public static final DriveSubsystem robotDrive = new DriveSubsystem();
@@ -76,27 +82,34 @@ public class RobotContainer {
     public static final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
     public static final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
     public static final limelightSubsystem LimeLightSubsystem = new limelightSubsystem();
+    public static final ClimbSubsystem climbSubsystem = new ClimbSubsystem();
 
     // public static final ManualTurretSubsystem ManualTurretSubsystem = new ManualTurretSubsystem();
 
     //Robot Commands
     public static final DriveCommand driveCommand = new DriveCommand();
     public static final ShooterOne ShooterOne = new ShooterOne();
+    public static final ClimbCommand climbCommand = new ClimbCommand();
+    
 
   // The driver's controller
   public static XboxController driverController = new XboxController(OIConstants.kDriverControllerPort);
   public static Joystick operatorController = new Joystick(OIConstants.kOperatorControllerPort); 
   public static CommandXboxController m_commandXboxController = new CommandXboxController(OIConstants.kDriverControllerPort);
   public static CommandJoystick m_OperatorController = new CommandJoystick(OIConstants.kOperatorControllerPort);
+  
 
   private final SendableChooser<Command> autoChooser;
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
+
+  
+
   public RobotContainer() {
 
     
-
+    
       //ZPaths 
     NamedCommands.registerCommand("New Path", autonPath("New Path"));
     
@@ -122,6 +135,8 @@ public class RobotContainer {
               LimeLightSubsystem.setDefaultCommand(
                 new ShooterOne()
               );
+
+              
 
   }
 
@@ -151,6 +166,8 @@ public class RobotContainer {
       m_OperatorController.axisLessThan(3, 0.8).whileTrue(
         ShooterOne
       );
+
+      m_commandXboxController.a().onTrue(climbCommand);
 
   }
 

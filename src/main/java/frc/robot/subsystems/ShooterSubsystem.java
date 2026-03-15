@@ -54,7 +54,7 @@ public boolean forceSlowMode = false;
       }
 
     }
-    SmartDashboard.putBoolean("testMode", testMode);
+    SmartDashboard.putBoolean("Manual Mode/testMode", testMode);
     if (testMode) {
        kicker.set(kickerManualPower);
     spindexer.set(spindexerSpeed);
@@ -95,9 +95,9 @@ public boolean forceSlowMode = false;
           }
 
 
-    SmartDashboard.putNumber("Top manual power", topManualPower);
-    SmartDashboard.putNumber("Bottom manual power", bottomManualPower);
-    SmartDashboard.putNumber("Kicker manual power", kickerManualPower);
+    SmartDashboard.putNumber("Manual Mode/Top manual power", topManualPower);
+    SmartDashboard.putNumber("Manual Mode/Bottom manual power", bottomManualPower);
+    SmartDashboard.putNumber("Manual Mode/Kicker manual power", kickerManualPower);
 //#endregion
 
 
@@ -116,8 +116,8 @@ public boolean forceSlowMode = false;
 
     }
 
-    SmartDashboard.putNumber("Spindexer speed", spindexerSpeed);
-    SmartDashboard.putNumber("kicker Speed", kickerSpeed);
+    SmartDashboard.putNumber("Mechanisims/Spindexer speed", spindexerSpeed);
+    SmartDashboard.putNumber("Mechanisims/kicker Speed", kickerSpeed);
 
 
     }
