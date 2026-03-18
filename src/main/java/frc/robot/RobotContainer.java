@@ -24,6 +24,7 @@ import edu.wpi.first.wpilibj.PS4Controller.Button;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
+import frc.robot.commands.AutoShoot;
 import frc.robot.commands.ClimbCommand;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.ShooterOne;
@@ -90,6 +91,8 @@ public class RobotContainer {
     public static final DriveCommand driveCommand = new DriveCommand();
     public static final ShooterOne ShooterOne = new ShooterOne();
     public static final ClimbCommand climbCommand = new ClimbCommand();
+    public static final AutoShoot autoShoot = new AutoShoot();
+
     
 
   // The driver's controller
@@ -108,11 +111,16 @@ public class RobotContainer {
 
   public RobotContainer() {
 
-    
+     NamedCommands.registerCommand("Reset Gyro", new InstantCommand(
+        () -> robotDrive.zeroHeading()
+      ));
     
       //ZPaths 
-    NamedCommands.registerCommand("New Path", autonPath("New Path"));
+    NamedCommands.registerCommand("Hello, World!", autonPath("Hello, World!"));
     
+    //Path Planner Commandas
+    NamedCommands.registerCommand("AutoShoot", autoShoot);
+
     // Configure the button bindings
     configureButtonBindings();
 

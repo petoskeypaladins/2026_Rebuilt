@@ -18,8 +18,8 @@ public class ShooterSubsystem extends SubsystemBase {
 
   public final SparkMax shooterBottom = new SparkMax(Constants.MechConstants.ShooterBottomCanID, MotorType.kBrushless);
   public final SparkMax shooterTop = new SparkMax(Constants.MechConstants.ShooterTopCanID, MotorType.kBrushless);
-  private final SparkMax spindexer = new SparkMax(Constants.MechConstants.SpindexerCanID, MotorType.kBrushless);
-  private final SparkMax kicker = new SparkMax(Constants.MechConstants.KickerCanID, MotorType.kBrushless);
+  public final SparkMax spindexer = new SparkMax(Constants.MechConstants.SpindexerCanID, MotorType.kBrushless);
+  public final SparkMax kicker = new SparkMax(Constants.MechConstants.KickerCanID, MotorType.kBrushless);
   
 
   /** Creates a new IntakeSubsystem. */
