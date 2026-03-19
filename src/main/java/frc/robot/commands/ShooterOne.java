@@ -70,8 +70,8 @@ public class ShooterOne extends Command {
       // Adescription = "linear";
 
 
-     RobotContainer.shooterSubsystem.shooterTop.set(-0.034*ty+0.453);
-     RobotContainer.shooterSubsystem.shooterBottom.set(0.011*ty-0.548);
+     RobotContainer.shooterSubsystem.shooterTop.set(-0.034*ty+0.553); //both powers were increased by 0.1 on 3/19/26 at 3:35 pm
+     RobotContainer.shooterSubsystem.shooterBottom.set(0.011*ty-0.648);
      shooterRunning = true;
       }
          if (RobotContainer.operatorController.getRawButton(11)){
