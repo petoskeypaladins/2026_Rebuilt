@@ -100,7 +100,10 @@ public class DriveSubsystem extends SubsystemBase {
             this::getPose, // Robot pose supplier
             this::resetOdometry, // Method to reset odometry (will be called if your auto has a starting pose)
             this::getRobotRelativeSpeeds,
-            (speeds, feedforwards) -> driveRobotRelative(speeds), // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
+            (speeds, feedforwards) -> {
+              speeds.omegaRadiansPerSecond *= -1;
+              driveRobotRelative(speeds);
+             }, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
            // this::drive, // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds
            DriveConstants.pathconfig,
            config,
@@ -204,7 +207,7 @@ public class DriveSubsystem extends SubsystemBase {
     // Convert the commanded speeds into the correct units for the drivetrain
     double xSpeedDelivered = xSpeed * DriveConstants.kMaxSpeedMetersPerSecond * speedmultiplier;
     double ySpeedDelivered = ySpeed * DriveConstants.kMaxSpeedMetersPerSecond * speedmultiplier;
-    double rotDelivered = -rot * DriveConstants.kMaxAngularSpeed * speedmultiplier;
+    double rotDelivered = -0.7 * rot * DriveConstants.kMaxAngularSpeed * speedmultiplier;
 
 
 
@@ -212,6 +215,7 @@ public class DriveSubsystem extends SubsystemBase {
       SmartDashboard.putNumber("delivered X", xSpeedDelivered);
       SmartDashboard.putNumber("delivered y", ySpeedDelivered);
       SmartDashboard.putNumber("delivered rotation", rotDelivered);
+
     var swerveModuleStates = DriveConstants.kDriveKinematics.toSwerveModuleStates(
         fieldRelative
             ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeedDelivered, ySpeedDelivered, rotDelivered,
@@ -227,6 +231,9 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   public void driveRobotRelative(ChassisSpeeds speeds) {
+          System.out.println("delivered y" + speeds.vyMetersPerSecond);
+      System.out.println("delivered x" + speeds.vxMetersPerSecond);
+      System.out.println("rot" + speeds.omegaRadiansPerSecond);
 
     var swerveModuleStates = 
       DriveConstants.kDriveKinematics.toSwerveModuleStates(speeds);

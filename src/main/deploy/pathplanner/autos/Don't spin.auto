@@ -5,15 +5,34 @@
     "data": {
       "commands": [
         {
-          "type": "path",
+          "type": "race",
           "data": {
-            "pathName": "Hello, World!"
+            "commands": [
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Hello, World!"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "RevUp"
+                }
+              }
+            ]
           }
         },
         {
           "type": "named",
           "data": {
-            "name": null
+            "name": "AutoTurretLeft"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoShoot"
           }
         }
       ]

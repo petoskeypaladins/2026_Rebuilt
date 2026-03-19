@@ -26,10 +26,15 @@ import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.AutoShoot;
 import frc.robot.commands.ClimbCommand;
+import frc.robot.commands.ClimbDown;
+import frc.robot.commands.ClimbUp;
 import frc.robot.commands.DriveCommand;
+import frc.robot.commands.RevUp;
 import frc.robot.commands.ShooterOne;
+import frc.robot.commands.AutoTurretLeft;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
+
 // import frc.robot.subsystems.ManualTurretSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TurretSubsystem;
@@ -130,6 +135,7 @@ public class RobotContainer {
     public static final limelightSubsystem LimeLightSubsystem = new limelightSubsystem();
     public static final ClimbSubsystem climbSubsystem = new ClimbSubsystem();
 
+
     // public static final ManualTurretSubsystem ManualTurretSubsystem = new ManualTurretSubsystem();
 
     //Robot Commands
@@ -137,6 +143,11 @@ public class RobotContainer {
     public static final ShooterOne ShooterOne = new ShooterOne();
     public static final ClimbCommand climbCommand = new ClimbCommand();
     public static final AutoShoot autoShoot = new AutoShoot();
+    public static final ClimbUp climbUp = new ClimbUp();
+    public static final ClimbDown climbDown = new ClimbDown();
+    public static final RevUp revUp = new RevUp();
+    public static final AutoTurretLeft autoTurretLeft = new AutoTurretLeft();
+  
 
     
 
@@ -163,8 +174,10 @@ public class RobotContainer {
       //ZPaths 
     NamedCommands.registerCommand("Hello, World!", autonPath("Hello, World!"));
     
-    //Path Planner Commandas
+    //Path Planner Commands
     NamedCommands.registerCommand("AutoShoot", autoShoot);
+    NamedCommands.registerCommand("RevUp", revUp);
+    NamedCommands.registerCommand("AutoTurret", autoTurretLeft);
 
     // Configure the button bindings
     configureButtonBindings();
@@ -185,9 +198,9 @@ public class RobotContainer {
                 true), 
               robotDrive ));
         
-              LimeLightSubsystem.setDefaultCommand(
-                new ShooterOne()
-              );
+              // LimeLightSubsystem.setDefaultCommand(
+              //   new ShooterOne()
+              // );
 
               
 
@@ -220,8 +233,9 @@ public class RobotContainer {
         ShooterOne);
 
 
-      m_commandXboxController.a().onTrue(climbCommand);
-
+      //m_commandXboxController.a().onTrue(climbCommand);
+      m_commandXboxController.a().whileTrue(climbDown);
+      m_commandXboxController.b().whileTrue(climbUp);
   }
 
   

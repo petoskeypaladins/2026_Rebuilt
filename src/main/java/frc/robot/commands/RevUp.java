@@ -6,51 +6,36 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.ShooterSubsystem;
-import frc.robot.subsystems.TurretSubsystem;
-
-import com.pathplanner.lib.config.RobotConfig;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class AutoShoot extends Command {
-  /** Creates a new AutoShoot. */
-  public AutoShoot() {
+public class RevUp extends Command {
+  /** Creates a new RevUp. */
+  public RevUp() {
     // Use addRequirements() here to declare subsystem dependencies.
-addRequirements(RobotContainer.shooterSubsystem);
-
-
+    addRequirements(RobotContainer.shooterSubsystem);
   }
 
-double tick =0;
-  // Called when the command is initially scheduled.-
+  // Called when the command is initially scheduled.
   @Override
   public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
-
-
-    RobotContainer.shooterSubsystem.shooterTop.set(0.4);
-    RobotContainer.shooterSubsystem.shooterBottom.set(-0.4);
-    RobotContainer.shooterSubsystem.spindexer.set(0.4);
-   RobotContainer.shooterSubsystem.kicker.set(0.95);
+  RobotContainer.shooterSubsystem.shooterTop.set(0.4);
+  RobotContainer.shooterSubsystem.shooterBottom.set(-0.4);
+  // RobotContainer.shooterSubsystem.spindexer.set(0.4);
+  //  RobotContainer.shooterSubsystem.kicker.set(0.95);
+   System.out.println("revving...");
   }
-    
+
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    TurretSubsystem.turretRotate.set(0);
-    RobotContainer.shooterSubsystem.shooterTop.set(0);
-    RobotContainer.shooterSubsystem.shooterBottom.set(0);   
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    System.out.println("stopped");
-    return tick > 1000;
-    
+    return false;
   }
 }
