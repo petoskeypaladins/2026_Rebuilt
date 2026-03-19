@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.AutoShoot;
 import frc.robot.commands.AutoTurretLeft;
 import frc.robot.commands.ShooterOne;
+import frc.robot.subsystems.TurretSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -94,6 +95,7 @@ public class Robot extends TimedRobot {
     }
 
     RobotContainer.LimeLightSubsystem.setDefaultCommand(new ShooterOne());
+    RobotContainer.TurretSubsystem.setDefaultCommand(null);
     
   }
 
