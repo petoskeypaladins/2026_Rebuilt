@@ -59,7 +59,7 @@ public class TurretSubsystem extends SubsystemBase {
     boolean resettinghigh = false;
     boolean resettinglow = false;
      private boolean wasEnabled = false;
-     double turretLimit = 16;
+     double turretLimit = 16;  //new turret limit is -4.1
      double turretRatio = 360 / 16.90; // <-- adjust as needed
 
      
@@ -102,25 +102,27 @@ public class TurretSubsystem extends SubsystemBase {
       resettinghigh = true;
   }
 
-  if (m_turretEncoder.getPosition() <= -turretLimit ) {
-    resettinglow = true;
+  if (m_turretEncoder.getPosition() <= -4.1 ) {
+    setTurretSpeed(0);
+    resettinghigh = true;
   }
 
 if (resettinghigh == false && resettinglow == false) {
-  //setTurretSpeed(RobotContainer.operatorController.getRawAxis(2) * 0.3);
-} else {
-  if (resettinghigh == true)  {
-      setTurretSpeed(-0.1);
-    if (m_turretEncoder.getPosition() <= 0) {
-      resettinghigh = false;
-    }
-  } else if (resettinglow == true) {
-      setTurretSpeed(0.1);
-      if (m_turretEncoder.getPosition() >= 0){
-        resettinglow = false;
-    }
-  }
+  setTurretSpeed(RobotContainer.operatorController.getRawAxis(2) * 0.3);
 }
+// } else {
+//   if (resettinghigh == true)  {
+//       setTurretSpeed(-0.1);
+//     if (m_turretEncoder.getPosition() <= 0) {
+//       resettinghigh = false;
+//     }
+//   } else if (resettinglow == true) {
+//       setTurretSpeed(0.1);
+//       if (m_turretEncoder.getPosition() >= 0){
+//         resettinglow = false;
+//     }
+//   }
+// }
   
 }
 

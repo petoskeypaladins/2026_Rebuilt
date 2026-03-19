@@ -75,7 +75,7 @@ public final class Constants {
 
     
 
-    public static final boolean kGyroReversed = false;
+    public static final boolean kGyroReversed = true;
   }
   
   public static final class MechConstants {

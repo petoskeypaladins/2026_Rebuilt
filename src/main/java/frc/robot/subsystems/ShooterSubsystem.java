@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.RobotContainer;
+import frc.robot.commands.ShooterOne;
+
 
 
 @SuppressWarnings("unused")
@@ -23,9 +25,10 @@ public class ShooterSubsystem extends SubsystemBase {
   
 
   /** Creates a new IntakeSubsystem. */
-  public ShooterSubsystem() {}
+  public ShooterSubsystem() {
   //public boolean shooterRunning = false;
-
+  SmartDashboard.putBoolean("shooter running", ShooterOne.shooterRunning);
+  }
   boolean testMode;
 
   double spindexerSpeed = 0;
@@ -46,53 +49,55 @@ public boolean forceSlowMode = false;
   public void periodic() {
 
 
-    if (RobotContainer.operatorController.getRawButtonPressed(6)){
-      if (testMode == false){
-        testMode = true;
-      } else {
-        testMode = false;
-      }
+    // if (RobotContainer.operatorController.getRawButtonPressed(6)){
+    //   if (testMode == false){
+    //     testMode = true;
+    //   } else {
+    //     testMode = false;
+    //   }
 
-    }
+
+    
+   testMode = false;
     SmartDashboard.putBoolean("Manual Mode/testMode", testMode);
-    if (testMode) {
-       kicker.set(kickerManualPower);
-    spindexer.set(spindexerSpeed);
-    shooterTop.set(topManualPower);
-    shooterBottom.set(bottomManualPower);
-    } else {
+
+   // if (testMode) {
+    //    kicker.set(kickerManualPower);
+    // spindexer.set(spindexerSpeed);
+    // shooterTop.set(topManualPower);
+    // shooterBottom.set(bottomManualPower);
+    // } else {
     kicker.set(kickerSpeed);
     spindexer.set(spindexerSpeed);
-    // shooterTop.set(shooterTopSpeed);
-    // shooterBottom.set(shooterBottomSpeed);
-
-    }
 
 
-    //#region "manual powers: TEMPORARY!"
-    if (RobotContainer.operatorController.getRawButtonPressed(10)){
-      topManualPower += 0.025;
-    }
+    // }
 
-        if (RobotContainer.operatorController.getRawButtonPressed(12)){
-      topManualPower -= 0.025;
-    }
 
-            if (RobotContainer.operatorController.getRawButtonPressed(9)){
-      bottomManualPower += 0.025;
-    }
+    // //#region "manual powers: TEMPORARY!"
+    // if (RobotContainer.operatorController.getRawButtonPressed(10)){
+    //   topManualPower += 0.025;
+    // }
 
-            if (RobotContainer.operatorController.getRawButtonPressed(11)){
-      bottomManualPower -= 0.025;
-    }
+    //     if (RobotContainer.operatorController.getRawButtonPressed(12)){
+    //   topManualPower -= 0.025;
+    // }
 
-          if (RobotContainer.operatorController.getRawButtonPressed(5)){
-            kickerManualPower += 0.025;
-          }
+    //         if (RobotContainer.operatorController.getRawButtonPressed(9)){
+    //   bottomManualPower += 0.025;
+    // }
 
-          if (RobotContainer.operatorController.getRawButtonPressed(3)){
-            kickerManualPower -= 0.025;
-          }
+    //         if (RobotContainer.operatorController.getRawButtonPressed(11)){
+    //   bottomManualPower -= 0.025;
+    // }
+
+    //       if (RobotContainer.operatorController.getRawButtonPressed(5)){
+    //         kickerManualPower += 0.025;
+    //       }
+
+    //       if (RobotContainer.operatorController.getRawButtonPressed(3)){
+    //         kickerManualPower -= 0.025;
+    //       }
 
 
     SmartDashboard.putNumber("Manual Mode/Top manual power", topManualPower);
@@ -104,7 +109,7 @@ public boolean forceSlowMode = false;
     // This method will be called once per scheduler run
     
     //spindexer and kicker
-    if (RobotContainer.operatorController.getRawButton(1) && RobotContainer.ShooterOne.shooterRunning == true){
+    if (RobotContainer.operatorController.getRawButton(1)  && RobotContainer.ShooterOne.shooterRunning == true){
         spindexerSpeed = SPINDEXER_POWER;
         kickerSpeed = KICKER_POWER;
     } else if (RobotContainer.operatorController.getRawButton(2) && RobotContainer.operatorController.getRawButton(1) ){
@@ -123,4 +128,3 @@ public boolean forceSlowMode = false;
     }
 
   }
-  

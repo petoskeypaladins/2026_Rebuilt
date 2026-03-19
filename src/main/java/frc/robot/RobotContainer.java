@@ -56,11 +56,56 @@ import java.io.IOException;
 import java.util.List;
 
 import org.json.simple.parser.ParseException;
-
 import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.AutoBuilderException;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.pathplanner.lib.config.RobotConfig;
 import com.pathplanner.lib.path.PathPlannerPath;
+import com.pathplanner.lib.auto.CommandUtil;
+import com.pathplanner.lib.commands.FollowPathCommand;
+import com.pathplanner.lib.commands.PathfindingCommand;
+import com.pathplanner.lib.commands.PathPlannerAuto;
+import com.pathplanner.lib.commands.PathfindThenFollowPath;
+import com.pathplanner.lib.config.ModuleConfig;
+import com.pathplanner.lib.config.PIDConstants;
+import com.pathplanner.lib.controllers.PathFollowingController;
+import com.pathplanner.lib.controllers.PPHolonomicDriveController;
+import com.pathplanner.lib.events.CancelCommandEvent;
+import com.pathplanner.lib.events.Event;
+import com.pathplanner.lib.events.EventScheduler;
+import com.pathplanner.lib.events.OneShotTriggerEvent;
+import com.pathplanner.lib.events.PointTowardsZoneEvent;
+import com.pathplanner.lib.events.PointTowardsZoneTrigger;
+import com.pathplanner.lib.events.ScheduleCommandEvent;
+import com.pathplanner.lib.events.TriggerEvent;
+import com.pathplanner.lib.path.ConstraintsZone;
+import com.pathplanner.lib.path.EventMarker;
+import com.pathplanner.lib.path.GoalEndState;
+import com.pathplanner.lib.path.IdealStartingState;
+import com.pathplanner.lib.path.PathConstraints;
+import com.pathplanner.lib.path.PathPlannerPath;
+import com.pathplanner.lib.path.PathPoint;
+import com.pathplanner.lib.path.RotationTarget;
+import com.pathplanner.lib.path.PointTowardsZone;
+import com.pathplanner.lib.path.Waypoint;
+import com.pathplanner.lib.pathfinding.LocalADStar;
+import com.pathplanner.lib.pathfinding.LocalADStar.GridPosition;
+import com.pathplanner.lib.pathfinding.Pathfinder;
+import com.pathplanner.lib.pathfinding.Pathfinding;
+import com.pathplanner.lib.trajectory.PathPlannerTrajectory;
+import com.pathplanner.lib.trajectory.PathPlannerTrajectoryState;
+import com.pathplanner.lib.trajectory.SwerveModuleTrajectoryState;
+import com.pathplanner.lib.util.DriveFeedforwards;
+import com.pathplanner.lib.util.FileVersionException;
+import com.pathplanner.lib.util.FlippingUtil;
+import com.pathplanner.lib.util.FlippingUtil.FieldSymmetry;
+import com.pathplanner.lib.util.GeometryUtil;
+import com.pathplanner.lib.util.JSONUtil;
+import com.pathplanner.lib.util.PathPlannerLogging;
+import com.pathplanner.lib.util.PPLibTelemetry;
+import com.pathplanner.lib.util.PPLibTesting;
+import com.pathplanner.lib.util.swerve.SwerveSetpoint;
+import com.pathplanner.lib.util.swerve.SwerveSetpointGenerator;
 
 
 /*
@@ -69,7 +114,7 @@ import com.pathplanner.lib.path.PathPlannerPath;
  * periodic methods (other than the scheduler calls).  Instead, the structure of the robot
  * (including subsystems, commands, and button mappings) should be declared here.
  */
-//@SuppressWarnings("unused")
+@SuppressWarnings("unused")
 public class RobotContainer {
     
     public static boolean climbBottomedOut;
@@ -172,8 +217,8 @@ public class RobotContainer {
       );
 
       m_OperatorController.axisLessThan(3, 0.8).whileTrue(
-        ShooterOne
-      );
+        ShooterOne);
+
 
       m_commandXboxController.a().onTrue(climbCommand);
 
