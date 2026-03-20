@@ -69,7 +69,7 @@ public class ShooterOne extends Command {
       // if (ABtesting == "A"){
       // Adescription = "linear";
 
-
+      
      RobotContainer.shooterSubsystem.shooterTop.set(-0.034*ty+0.553); //both powers were increased by 0.1 on 3/19/26 at 3:35 pm
      RobotContainer.shooterSubsystem.shooterBottom.set(0.011*ty-0.648);
      shooterRunning = true;
@@ -81,6 +81,11 @@ public class ShooterOne extends Command {
 
     shooterRunning = true;
       }
+        else if (RobotContainer.operatorController.getRawButton(12)){
+          RobotContainer.shooterSubsystem.shooterTop.set(0.4);
+          RobotContainer.shooterSubsystem.shooterBottom.set(-0.4);
+
+        }
 
     //  } else {
       // Bdescription = "cubic";
