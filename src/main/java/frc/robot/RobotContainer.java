@@ -29,6 +29,7 @@ import frc.robot.commands.ClimbCommand;
 import frc.robot.commands.ClimbDown;
 import frc.robot.commands.ClimbUp;
 import frc.robot.commands.DriveCommand;
+import frc.robot.commands.NullCommand;
 import frc.robot.commands.RevUp;
 import frc.robot.commands.ShooterOne;
 import frc.robot.commands.AutoTurretLeft;
@@ -147,6 +148,7 @@ public class RobotContainer {
     public static final ClimbDown climbDown = new ClimbDown();
     public static final RevUp revUp = new RevUp();
     public static final AutoTurretLeft autoTurretLeft = new AutoTurretLeft();
+    public static final NullCommand nullCommand = new NullCommand();
   
 
     
@@ -178,6 +180,7 @@ public class RobotContainer {
     NamedCommands.registerCommand("AutoShoot", autoShoot);
     NamedCommands.registerCommand("RevUp", revUp);
     NamedCommands.registerCommand("AutoTurret", autoTurretLeft);
+    NamedCommands.registerCommand("NullCommand", nullCommand);
 
     // Configure the button bindings
     configureButtonBindings();

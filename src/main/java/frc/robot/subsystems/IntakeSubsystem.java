@@ -31,14 +31,22 @@ public class IntakeSubsystem extends SubsystemBase {
   intake.set(intakeSpeed);
 
 //SmartDashboard.putNumber("IntakeSpeed", intakeSpeed);
-    if (intakeSpeed == 0){
-      if (RobotContainer.driverController.getLeftBumperButtonPressed() == true){
-        intakeSpeed = -0.5;
-      } else if(RobotContainer.driverController.getRightBumperButtonPressed() == true) {
-        intakeSpeed = 0.5;
-      }
+    // if (intakeSpeed == 0){
+    //   if (RobotContainer.driverController.getLeftBumperButtonPressed() == true){
+    //     intakeSpeed = -0.5;
+    //   } else if(RobotContainer.driverController.getRightBumperButtonPressed() == true) {
+    //     intakeSpeed = 0.5;
+    //   }
       
-    } else if ((RobotContainer.driverController.getLeftBumperButtonPressed()) || (RobotContainer.driverController.getRightBumperButtonPressed())){
+    // } else if ((RobotContainer.driverController.getLeftBumperButtonPressed()) || (RobotContainer.driverController.getRightBumperButtonPressed())){
+    //   intakeSpeed = 0;
+    // }
+
+    if (RobotContainer.driverController.getRightBumperButtonPressed()){
+      intakeSpeed = 0.5;
+    } else if (RobotContainer.driverController.getLeftBumperButtonPressed()) {
+      intakeSpeed = -0.5;
+    } else {
       intakeSpeed = 0;
     }
 
