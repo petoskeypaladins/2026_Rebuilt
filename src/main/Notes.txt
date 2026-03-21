@@ -38,3 +38,6 @@ public void turretTrackPose(Pose2d target) {
     // Command turret
     this.setPivotPosition(robotRelativeAngle.getDegrees());
   }
+
+
+  //TODO: delete the depricated autoTurret command

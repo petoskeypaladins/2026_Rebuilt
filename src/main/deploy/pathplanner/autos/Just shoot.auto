@@ -11,6 +11,12 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "AutoTurretLeft"
+          }
+        },
+        {
           "type": "race",
           "data": {
             "commands": [
@@ -30,9 +36,9 @@
           }
         },
         {
-          "type": "named",
+          "type": "wait",
           "data": {
-            "name": "AutoTurretLeft"
+            "waitTime": 1.0
           }
         },
         {

@@ -6,48 +6,22 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.ShooterSubsystem;
-import frc.robot.subsystems.TurretSubsystem;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class AutoTurretLeft extends Command {
-  /** Creates a new AutoTurret. */
-  public AutoTurretLeft() {
+public class NullIntake extends Command {
+  /** Creates a new NullCOmmand. */
+  public NullIntake() {
+    addRequirements(RobotContainer.intakeSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.TurretSubsystem);
   }
-boolean done = false;
+
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {
-  }
-
-    double tick = 0;
-
+  public void initialize() {}
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-
-
-  public void execute() {
-    if (tick == 0){
-    TurretSubsystem.m_turretEncoder.setPosition(0);
-    tick +=1;   
-    }
-
-    if (TurretSubsystem.m_turretEncoder.getPosition() >= -3.85) {
-      TurretSubsystem.turretRotate.set(-0.2);
-      done = false;
-
-    } else {
-      TurretSubsystem.turretRotate.set(0);
-      done = true;
-    }
-
-    
-
-
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override
@@ -56,6 +30,6 @@ boolean done = false;
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return done;
+    return false;
   }
 }

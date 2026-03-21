@@ -75,15 +75,17 @@ public class ShooterOne extends Command {
      shooterRunning = true;
       }
          if (RobotContainer.operatorController.getRawButton(11)){
-      RobotContainer.shooterSubsystem.shooterTop.set(0.5);
-     RobotContainer.shooterSubsystem.shooterBottom.set(-0.3);
+      RobotContainer.shooterSubsystem.shooterTop.set(0.4);
+     RobotContainer.shooterSubsystem.shooterBottom.set(-0.4);
 
 
     shooterRunning = true;
       }
         else if (RobotContainer.operatorController.getRawButton(12)){
-          RobotContainer.shooterSubsystem.shooterTop.set(0.4);
-          RobotContainer.shooterSubsystem.shooterBottom.set(-0.4);
+          RobotContainer.shooterSubsystem.shooterTop.set(0.8);
+          RobotContainer.shooterSubsystem.shooterBottom.set(-0.6); 
+
+
 
         }
 

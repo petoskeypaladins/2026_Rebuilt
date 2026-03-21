@@ -42,10 +42,10 @@ public class IntakeSubsystem extends SubsystemBase {
     //   intakeSpeed = 0;
     // }
 
-    if (RobotContainer.driverController.getRightBumperButtonPressed()){
-      intakeSpeed = 0.5;
-    } else if (RobotContainer.driverController.getLeftBumperButtonPressed()) {
-      intakeSpeed = -0.5;
+    if (RobotContainer.driverController.getRightBumperButton()){
+      intakeSpeed = 0.8;
+    } else if (RobotContainer.driverController.getLeftBumperButton()) {
+      intakeSpeed = -0.8;
     } else {
       intakeSpeed = 0;
     }

@@ -108,7 +108,7 @@ public class TurretSubsystem extends SubsystemBase {
   }
 
 if (resettinghigh == false && resettinglow == false) {
-  if ( RobotContainer.operatorController.getRawButton(3)){
+  if (RobotContainer.operatorController.getRawButton(3)){
   setTurretSpeed(RobotContainer.operatorController.getRawAxis(2) * 0.3);
   } else {
     setTurretSpeed(0);
@@ -144,7 +144,6 @@ if (resettinghigh == false && resettinglow == false) {
 
   public void setTurretSpeed(double speed){
    turretRotate.set(speed);
-//This line is critical. It is commented out right now so they can test the shooter powers.
   }
 
 
