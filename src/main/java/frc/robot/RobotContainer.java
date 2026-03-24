@@ -152,6 +152,7 @@ public class RobotContainer {
     public static final RevUp revUp = new RevUp();
     public static final AutoTurretLeft autoTurretLeft = new AutoTurretLeft();
     public static final NullCommand nullCommand = new NullCommand();
+    public static final TeleOpTurret teleOpTurret = new TeleOpTurret();
   
 
     

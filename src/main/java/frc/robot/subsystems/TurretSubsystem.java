@@ -107,7 +107,6 @@ public class TurretSubsystem extends SubsystemBase {
 //   //   resettinghigh = true;
 //   // }
 
-<<<<<<< HEAD
 // if (resettinghigh == false && resettinglow == false) {
 //   if (RobotContainer.operatorController.getRawButton(3)){
 //   setTurretSpeed(RobotContainer.operatorController.getRawAxis(2) * 0.3);
@@ -116,16 +115,6 @@ public class TurretSubsystem extends SubsystemBase {
 //   }
 // }
 // // } else {
-=======
-if (resettinghigh == false && resettinglow == false) {
-  if (RobotContainer.operatorController.getRawButton(3)){
-  setTurretSpeed(RobotContainer.operatorController.getRawAxis(2) * 0.3);
-  } else {
-    setTurretSpeed(0);
-  }
-}
-// } else {
->>>>>>> 3bc2fa61ef407d364cbf6e3c462ed8d3304bec5f
 //   if (resettinghigh == true)  {
 //       setTurretSpeed(-0.1);
 //     if (m_turretEncoder.getPosition() <= 0) {
