@@ -24,7 +24,7 @@ public class ClimbUp extends Command {
   @Override
   public void execute() {
     if (RobotContainer.climbSubsystem.climb.getPosition().getValueAsDouble() < ClimbSubsystem.climbTop) {
-      RobotContainer.climbSubsystem.climb.set(0.5);  // test that, we had it at 0.3
+      RobotContainer.climbSubsystem.climb.set(1);  // test that, we had it at 0.3
     } else {
       RobotContainer.climbSubsystem.climb.set(0);
       //toggleState();

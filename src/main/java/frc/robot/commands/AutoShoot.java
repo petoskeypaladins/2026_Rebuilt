@@ -21,7 +21,7 @@ addRequirements(RobotContainer.shooterSubsystem);
 
   }
 
-double tick =0;
+double tick = 0;
   // Called when the command is initially scheduled.-
   @Override
   public void initialize() {}

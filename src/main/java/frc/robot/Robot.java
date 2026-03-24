@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.AutoShoot;
 import frc.robot.commands.AutoTurretLeft;
 import frc.robot.commands.NullCommand;
+import frc.robot.commands.NullIntake;
 import frc.robot.commands.ShooterOne;
 import frc.robot.subsystems.TurretSubsystem;
 
@@ -97,7 +98,7 @@ public class Robot extends TimedRobot {
 
     RobotContainer.LimeLightSubsystem.setDefaultCommand(new ShooterOne());
     RobotContainer.TurretSubsystem.setDefaultCommand(new NullCommand());
-
+    RobotContainer.intakeSubsystem.setDefaultCommand(new NullIntake());
 
     
   }

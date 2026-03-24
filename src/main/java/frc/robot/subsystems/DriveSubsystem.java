@@ -145,13 +145,19 @@ public class DriveSubsystem extends SubsystemBase {
             m_rearRight.getPosition()
         });
 
-      if (forceslowmode == true)
-      //slow mode control
-      if (RobotContainer.operatorController.getRawAxis(2) > 0 )  {
-        /*  speedmultiplier = 0.5**/ RobotContainer.operatorController.getRawAxis(2);
-      } else {
-        /* speedmultiplier  = 1; */
-      }
+      // if (forceslowmode == true) {speedmultiplier = 0.5;}
+      // //slow mode control
+      // if (RobotContainer.operatorController.getRawAxis(2) > 0 )  {
+      //   /*  speedmultiplier = 0.5**/ RobotContainer.operatorController.getRawAxis(2);
+      // } else {
+      //   /* speedmultiplier  = 1; */
+      // }
+
+        if (forceslowmode == true){
+          speedmultiplier = 0.5;
+        } else {
+          speedmultiplier = 1;
+        }
   }
   
 

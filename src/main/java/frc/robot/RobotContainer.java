@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.PS4Controller.Button;
-// Nothings going on the smartdashboard right now. In Robot Container, at least
+
 // import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
@@ -30,19 +30,22 @@ import frc.robot.commands.ClimbDown;
 import frc.robot.commands.ClimbUp;
 import frc.robot.commands.DriveCommand;
 import frc.robot.commands.NullCommand;
+import frc.robot.commands.NullIntake;
+import frc.robot.commands.ResetTurret;
 import frc.robot.commands.RevUp;
 import frc.robot.commands.ShooterOne;
+import frc.robot.commands.TeleOpTurret;
 import frc.robot.commands.AutoTurretLeft;
+import frc.robot.commands.TeleOpTurret;
+import frc.robot.commands.ResetTurret;
+
+//import robot subsystems
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
-
-// import frc.robot.subsystems.ManualTurretSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TurretSubsystem;
 import frc.robot.subsystems.limelightSubsystem;
 import frc.robot.subsystems.ClimbSubsystem;
-
-
 
 // We don't need this rn.
 // import frc.robot.subsystems.limelightSubsystem;
@@ -60,6 +63,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import com.revrobotics.spark.config.LimitSwitchConfig;
 import java.io.IOException;
 import java.util.List;
+
+import javax.print.attribute.standard.MediaSize.NA;
 
 import org.json.simple.parser.ParseException;
 import com.pathplanner.lib.auto.AutoBuilder;
@@ -149,6 +154,9 @@ public class RobotContainer {
     public static final RevUp revUp = new RevUp();
     public static final AutoTurretLeft autoTurretLeft = new AutoTurretLeft();
     public static final NullCommand nullCommand = new NullCommand();
+    public static final NullIntake nullIntake = new NullIntake();
+    public static final TeleOpTurret teleOpTurret = new TeleOpTurret();
+    public static final ResetTurret resetTurret = new ResetTurret();
   
 
     
@@ -157,7 +165,7 @@ public class RobotContainer {
   public static XboxController driverController = new XboxController(OIConstants.kDriverControllerPort);
   public static Joystick operatorController = new Joystick(OIConstants.kOperatorControllerPort); 
   public static CommandXboxController m_commandXboxController = new CommandXboxController(OIConstants.kDriverControllerPort);
-  public static CommandJoystick m_OperatorController = new CommandJoystick(OIConstants.kOperatorControllerPort);
+  public static CommandJoystick m_operatorController = new CommandJoystick(OIConstants.kOperatorControllerPort);
   
 
   private final SendableChooser<Command> autoChooser;
@@ -181,6 +189,9 @@ public class RobotContainer {
     NamedCommands.registerCommand("RevUp", revUp);
     NamedCommands.registerCommand("AutoTurret", autoTurretLeft);
     NamedCommands.registerCommand("NullCommand", nullCommand);
+    NamedCommands.registerCommand("NullIntake", nullIntake);
+    NamedCommands.registerCommand("ResetTurret", resetTurret);
+    
 
     // Configure the button bindings
     configureButtonBindings();
@@ -232,13 +243,14 @@ public class RobotContainer {
           () -> robotDrive.zeroHeading(), robotDrive)
       );
 
-      m_OperatorController.axisLessThan(3, 0.8).whileTrue(
+      m_operatorController.axisLessThan(3, 0.8).whileTrue(
         ShooterOne);
 
 
       //m_commandXboxController.a().onTrue(climbCommand);
       m_commandXboxController.a().whileTrue(climbDown);
       m_commandXboxController.b().whileTrue(climbUp);
+      m_operatorController.button(3).whileTrue(teleOpTurret);
   }
 
   

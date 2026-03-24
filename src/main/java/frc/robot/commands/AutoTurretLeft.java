@@ -30,11 +30,13 @@ boolean done = false;
 
 
   public void execute() {
-
-    
+    if (tick == 0){
+    TurretSubsystem.m_turretEncoder.setPosition(0);
+    tick +=1;   
+    }
 
     if (TurretSubsystem.m_turretEncoder.getPosition() >= -3.85) {
-      TurretSubsystem.turretRotate.set(-0.3);
+      TurretSubsystem.turretRotate.set(-0.2);
       done = false;
 
     } else {

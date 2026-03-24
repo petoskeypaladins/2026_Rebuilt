@@ -56,8 +56,8 @@ public class TurretSubsystem extends SubsystemBase {
   //m_turretController.setSetpoint(setPoint, ControlType.
     private double speed;
     private final SlewRateLimiter slewRateLimiter = new SlewRateLimiter(0.5); // Adjust rate as needed
-    boolean resettinghigh = false;
-    boolean resettinglow = false;
+    public static boolean resettinghigh = false;
+    public static boolean resettinglow = false;
      private boolean wasEnabled = false;
      double turretLimit = 16;  //new turret limit is -4.1
      double turretRatio = 360 / 16.90; // <-- adjust as needed
@@ -87,34 +87,34 @@ public class TurretSubsystem extends SubsystemBase {
   SmartDashboard.putNumber("TurretVelocity", m_turretEncoder.getVelocity());
   SmartDashboard.putBoolean("resettingHigh", resettinghigh);
   SmartDashboard.putBoolean("ResettingLow", resettinglow);
-       boolean isEnabled = DriverStation.isEnabled();
-       if (isEnabled && !wasEnabled) {
-           resetTurretEncoder();
-           resettinghigh = false;
-           resettinglow = false;
-       }
+//        boolean isEnabled = DriverStation.isEnabled();
+//        if (isEnabled && !wasEnabled) {
+//            resetTurretEncoder();
+//            resettinghigh = false;
+//            resettinglow = false;
+//        }
 
       
 
-      wasEnabled = isEnabled;
+//       wasEnabled = isEnabled;
   
-  if (m_turretEncoder.getPosition() >= turretLimit ) {
-      resettinghigh = true;
-  }
+//   // if (m_turretEncoder.getPosition() >= turretLimit ) {
+//   //     resettinghigh = true;
+//   // }
 
-  if (m_turretEncoder.getPosition() <= -4.1 ) {
-    setTurretSpeed(0);
-    resettinghigh = true;
-  }
+//   // if (m_turretEncoder.getPosition() <= -4.1 ) {
+//   //   setTurretSpeed(0);
+//   //   resettinghigh = true;
+//   // }
 
-if (resettinghigh == false && resettinglow == false) {
-  if ( RobotContainer.operatorController.getRawButton(3)){
-  setTurretSpeed(RobotContainer.operatorController.getRawAxis(2) * 0.3);
-  } else {
-    setTurretSpeed(0);
-  }
-}
-// } else {
+// if (resettinghigh == false && resettinglow == false) {
+//   if (RobotContainer.operatorController.getRawButton(3)){
+//   setTurretSpeed(RobotContainer.operatorController.getRawAxis(2) * 0.3);
+//   } else {
+//     setTurretSpeed(0);
+//   }
+// }
+// // } else {
 //   if (resettinghigh == true)  {
 //       setTurretSpeed(-0.1);
 //     if (m_turretEncoder.getPosition() <= 0) {
@@ -136,15 +136,14 @@ if (resettinghigh == false && resettinglow == false) {
       return m_turretEncoder.getPosition();
     }
   
-    public void resetTurretEncoder() {
-      m_turretEncoder.setPosition(0);
+    // public static void resetTurretEncoder() {
+    //   // m_turretEncoder.setPosition(0);
     
-    }
+    // }
   
 
-  public void setTurretSpeed(double speed){
+  public static void setTurretSpeed(double speed){
    turretRotate.set(speed);
-//This line is critical. It is commented out right now so they can test the shooter powers.
   }
 
 
