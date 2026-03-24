@@ -42,8 +42,17 @@
           }
         },
         {
+          "type": "wait",
+          "data": {
+<<<<<<< HEAD
+=======
+            "waitTime": 1.0
+          }
+        },
+        {
           "type": "named",
           "data": {
+>>>>>>> 3bc2fa61ef407d364cbf6e3c462ed8d3304bec5f
             "name": "AutoShoot"
           }
         }
