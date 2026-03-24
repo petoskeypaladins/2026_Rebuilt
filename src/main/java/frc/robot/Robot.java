@@ -14,6 +14,7 @@ import frc.robot.commands.AutoTurretLeft;
 import frc.robot.commands.NullCommand;
 import frc.robot.commands.NullIntake;
 import frc.robot.commands.ShooterOne;
+import frc.robot.commands.TeleOpTurret;
 import frc.robot.subsystems.TurretSubsystem;
 
 /**
@@ -97,7 +98,7 @@ public class Robot extends TimedRobot {
     }
 
     RobotContainer.LimeLightSubsystem.setDefaultCommand(new ShooterOne());
-    RobotContainer.TurretSubsystem.setDefaultCommand(new NullCommand());
+    RobotContainer.TurretSubsystem.setDefaultCommand(new TeleOpTurret());
     RobotContainer.intakeSubsystem.setDefaultCommand(new NullIntake());
 
     
