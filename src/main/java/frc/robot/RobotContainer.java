@@ -29,6 +29,7 @@ import frc.robot.commands.ClimbCommand;
 import frc.robot.commands.ClimbDown;
 import frc.robot.commands.ClimbUp;
 import frc.robot.commands.DriveCommand;
+import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.NullCommand;
 import frc.robot.commands.RevUp;
 import frc.robot.commands.ShooterOne;
@@ -36,7 +37,8 @@ import frc.robot.commands.TeleOpTurret;
 import frc.robot.commands.AutoTurretLeft;
 import frc.robot.commands.TeleOpTurret;
 import frc.robot.commands.ResetTurret;
-
+import frc.robot.commands.IntakeCommand;
+import frc.robot.commands.OuttakeCommand;
 //import robot subsystems
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -153,6 +155,8 @@ public class RobotContainer {
     public static final AutoTurretLeft autoTurretLeft = new AutoTurretLeft();
     public static final NullCommand nullCommand = new NullCommand();
     public static final TeleOpTurret teleOpTurret = new TeleOpTurret();
+    public static final IntakeCommand intakeCommand = new IntakeCommand();
+    public static final OuttakeCommand outtakeCommand = new OuttakeCommand();
   
 
     

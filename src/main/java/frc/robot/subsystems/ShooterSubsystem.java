@@ -31,13 +31,13 @@ public class ShooterSubsystem extends SubsystemBase {
   }
   boolean testMode;
 
-  double spindexerSpeed = 0;
-  double kickerSpeed = 0;
+  static public double spindexerSpeed = 0;
+  static public double kickerSpeed = 0;
 
 
   //Change these when testing speed
-  double SPINDEXER_POWER = 0.4;
-  double KICKER_POWER = 0.95;
+static public double SPINDEXER_POWER = 0.4;
+static public double KICKER_POWER = 0.95;
 
 double topManualPower = 0;
 double bottomManualPower = 0;
@@ -109,17 +109,17 @@ public boolean forceSlowMode = false;
     // This method will be called once per scheduler run
     
     //spindexer and kicker
-    if (RobotContainer.operatorController.getRawButton(1)  && RobotContainer.ShooterOne.shooterRunning == true){
-        spindexerSpeed = SPINDEXER_POWER;
-        kickerSpeed = KICKER_POWER;
-    } else if (RobotContainer.operatorController.getRawButton(2) && RobotContainer.operatorController.getRawButton(1) ){
-      spindexerSpeed = -0.5 * SPINDEXER_POWER; //Reduces power in reverse
-      kickerSpeed = -0.5 * KICKER_POWER;  //Reduces power in reverse
-    } else {
-      spindexerSpeed = 0;
-      kickerSpeed = 0;
+    // if (RobotContainer.operatorController.getRawButton(1)  && RobotContainer.ShooterOne.shooterRunning == true){
+    //     spindexerSpeed = SPINDEXER_POWER;
+    //     kickerSpeed = KICKER_POWER;
+    // } else if (RobotContainer.operatorController.getRawButton(2) && RobotContainer.operatorController.getRawButton(1) ){
+    //   spindexerSpeed = -0.5 * SPINDEXER_POWER; //Reduces power in reverse
+    //   kickerSpeed = -0.5 * KICKER_POWER;  //Reduces power in reverse
+    // } else {
+    //   spindexerSpeed = 0;
+    //   kickerSpeed = 0;
 
-    }
+    // }
 
     SmartDashboard.putNumber("Mechanisims/Spindexer speed", spindexerSpeed);
     SmartDashboard.putNumber("Mechanisims/kicker Speed", kickerSpeed);

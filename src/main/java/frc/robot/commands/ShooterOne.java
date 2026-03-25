@@ -78,6 +78,17 @@ public class ShooterOne extends Command {
       RobotContainer.shooterSubsystem.shooterTop.set(0.4);
      RobotContainer.shooterSubsystem.shooterBottom.set(-0.4);
 
+      if (RobotContainer.operatorController.getRawButton(1)  && RobotContainer.ShooterOne.shooterRunning == true){
+        ShooterSubsystem.spindexerSpeed = ShooterSubsystem.SPINDEXER_POWER;
+        ShooterSubsystem.kickerSpeed = ShooterSubsystem.KICKER_POWER;
+    } else if (RobotContainer.operatorController.getRawButton(2) && RobotContainer.operatorController.getRawButton(1) ){
+      ShooterSubsystem.spindexerSpeed = -0.5 * ShooterSubsystem.SPINDEXER_POWER; //Reduces power in reverse
+      ShooterSubsystem.kickerSpeed = -0.5 * ShooterSubsystem.KICKER_POWER;  //Reduces power in reverse
+    } else {
+      ShooterSubsystem.spindexerSpeed = 0;
+      ShooterSubsystem.kickerSpeed = 0;
+
+    }
 
     shooterRunning = true;
       }

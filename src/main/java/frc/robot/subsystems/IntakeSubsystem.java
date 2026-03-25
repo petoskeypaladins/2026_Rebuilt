@@ -24,7 +24,7 @@ public class IntakeSubsystem extends SubsystemBase {
   /** Creates a new IntakeSubsystem. */
   public IntakeSubsystem() {}
 
-  double intakeSpeed = 0;
+ public static double intakeSpeed = 0;
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
@@ -42,13 +42,13 @@ public class IntakeSubsystem extends SubsystemBase {
     //   intakeSpeed = 0;
     // }
 
-    if (RobotContainer.driverController.getRightBumperButton()){
-      intakeSpeed = 0.8;
-    } else if (RobotContainer.driverController.getLeftBumperButton()) {
-      intakeSpeed = -0.8;
-    } else {
-      intakeSpeed = 0;
-    }
+    // if (RobotContainer.driverController.getRightBumperButton()){
+    //   intakeSpeed = 0.8;
+    // } else if (RobotContainer.driverController.getLeftBumperButton()) {
+    //   intakeSpeed = -0.8;
+    // } else {
+    //   intakeSpeed = 0;
+    // }
 
     
   }
