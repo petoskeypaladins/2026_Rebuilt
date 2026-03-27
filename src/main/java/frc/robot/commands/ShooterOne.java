@@ -39,6 +39,8 @@ public class ShooterOne extends Command {
   @Override
   public void execute() {
 
+    System.out.println(shooterRunning);
+
     SmartDashboard.putNumber("Limelight TY",RobotContainer.LimeLightSubsystem.ty);
     SmartDashboard.putNumber("Shooter top speed", RobotContainer.shooterSubsystem.shooterTop.get());
     SmartDashboard.putNumber("Shooter bottom speed",RobotContainer.shooterSubsystem.shooterBottom.get());
@@ -77,8 +79,9 @@ public class ShooterOne extends Command {
          if (RobotContainer.operatorController.getRawButton(11)){
       RobotContainer.shooterSubsystem.shooterTop.set(0.4);
      RobotContainer.shooterSubsystem.shooterBottom.set(-0.4);
-
-      if (RobotContainer.operatorController.getRawButton(1)  && RobotContainer.ShooterOne.shooterRunning == true){
+         }
+      if (RobotContainer.operatorController.getRawButton(1) /*  && RobotContainer.ShooterOne.shooterRunning == true*/){
+        System.out.println("shooting");
         ShooterSubsystem.spindexerSpeed = ShooterSubsystem.SPINDEXER_POWER;
         ShooterSubsystem.kickerSpeed = ShooterSubsystem.KICKER_POWER;
     } else if (RobotContainer.operatorController.getRawButton(2) && RobotContainer.operatorController.getRawButton(1) ){
@@ -91,8 +94,8 @@ public class ShooterOne extends Command {
     }
 
     shooterRunning = true;
-      }
-        else if (RobotContainer.operatorController.getRawButton(12)){
+      
+       /*  else */ if (RobotContainer.operatorController.getRawButton(12)){
           RobotContainer.shooterSubsystem.shooterTop.set(0.8);
           RobotContainer.shooterSubsystem.shooterBottom.set(-0.6); 
 

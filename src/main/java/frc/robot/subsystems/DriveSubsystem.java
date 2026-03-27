@@ -204,7 +204,7 @@ public class DriveSubsystem extends SubsystemBase {
       speedmultiplier = RobotContainer.driverController.getLeftTriggerAxis();
     }   else if (RobotContainer.operatorController.getRawButton(1)){
       speedmultiplier = 0.5;
-      RobotContainer.driverController.setRumble(RumbleType.kBothRumble, 1);
+      //RobotContainer.driverController.setRumble(RumbleType.kBothRumble, 1);
     } else {
       speedmultiplier = 1;
       RobotContainer.driverController.setRumble(RumbleType.kBothRumble, 0);

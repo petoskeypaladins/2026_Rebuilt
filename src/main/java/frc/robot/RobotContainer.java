@@ -240,6 +240,14 @@ public class RobotContainer {
           () -> robotDrive.zeroHeading(), robotDrive)
       );
 
+      m_commandXboxController.rightBumper().whileTrue(
+        intakeCommand
+      );
+
+      m_commandXboxController.leftBumper().whileTrue(
+        outtakeCommand
+      );
+
       m_operatorController.axisLessThan(3, 0.8).whileTrue(
         ShooterOne);
 
