@@ -184,6 +184,7 @@ public class RobotContainer {
     
       //ZPaths 
     NamedCommands.registerCommand("Hello, World!", autonPath("Hello, World!"));
+    NamedCommands.registerCommand("Reverse", autonPath("Reverse"));
     
     //Path Planner Commands
     NamedCommands.registerCommand("AutoShoot", autoShoot);

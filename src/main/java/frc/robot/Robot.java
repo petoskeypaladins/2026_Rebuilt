@@ -79,8 +79,9 @@ public class Robot extends TimedRobot {
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       CommandScheduler.getInstance().schedule(m_autonomousCommand);
-      RobotContainer.TurretSubsystem.setDefaultCommand(new AutoTurretLeft());
-      RobotContainer.shooterSubsystem.setDefaultCommand(new AutoShoot());
+      //  03-28-26: Commented out 83 and 84 to prevent unwanted movement when testing ramp precision
+      // RobotContainer.TurretSubsystem.setDefaultCommand(new AutoTurretLeft());
+      // RobotContainer.shooterSubsystem.setDefaultCommand(new AutoShoot());
     }
   }
 
@@ -98,7 +99,7 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
 
-    RobotContainer.LimeLightSubsystem.setDefaultCommand(new ShooterTwo());
+    //RobotContainer.LimeLightSubsystem.setDefaultCommand(new ShooterTwo());
     RobotContainer.TurretSubsystem.setDefaultCommand(new TeleOpTurret());
     RobotContainer.intakeSubsystem.setDefaultCommand(new NullIntake());
 

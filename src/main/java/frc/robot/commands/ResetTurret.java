@@ -23,7 +23,7 @@ public class ResetTurret extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-           TurretSubsystem.m_turretEncoder.setPosition(0);
+           //TurretSubsystem.m_turretEncoder.setPosition(0);
   }
 
   // Called once the command ends or is interrupted.

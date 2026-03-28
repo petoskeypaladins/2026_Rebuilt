@@ -18,16 +18,21 @@ import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.TrajectoryConfig;
 import edu.wpi.first.math.trajectory.TrajectoryGenerator;
+
+import com.revrobotics.spark.SparkAbsoluteEncoder;
 // REV Robotics imports
 import com.revrobotics.spark.SparkClosedLoopController;
+import com.revrobotics.spark.SparkFlex;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkBase.ControlType;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
+import com.revrobotics.spark.config.AbsoluteEncoderConfig;
 
 import java.security.PublicKey;
 
+import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.RelativeEncoder;
 import frc.robot.Constants;
 import frc.robot.Constants.TurretConstants;
@@ -49,9 +54,9 @@ import frc.robot.subsystems.limelightSubsystem;
 public class TurretSubsystem extends SubsystemBase {
 
 
-  public static final SparkMax turretRotate = new SparkMax(
+  public static final SparkFlex turretRotate = new SparkFlex(
       Constants.MechConstants.turretRotateCanID, MotorType.kBrushless);
-  public static final RelativeEncoder m_turretEncoder = turretRotate.getEncoder();
+  public static final SparkAbsoluteEncoder m_turretEncoder = turretRotate.getAbsoluteEncoder();
   public static final SparkClosedLoopController m_turretController = turretRotate.getClosedLoopController();
   //m_turretController.setSetpoint(setPoint, ControlType.
     private double speed;
@@ -69,7 +74,7 @@ public class TurretSubsystem extends SubsystemBase {
   
     //* Creates a new TurretSubsystem.
     public TurretSubsystem() {
-            m_turretEncoder.setPosition(0);
+           
     }
     
 
@@ -84,6 +89,7 @@ public class TurretSubsystem extends SubsystemBase {
 
 
   SmartDashboard.putNumber("TurretPosition", m_turretEncoder.getPosition());
+  SmartDashboard.putNumber("Turret angle", 0);
   SmartDashboard.putNumber("TurretVelocity", m_turretEncoder.getVelocity());
   SmartDashboard.putBoolean("resettingHigh", resettinghigh);
   SmartDashboard.putBoolean("ResettingLow", resettinglow);
