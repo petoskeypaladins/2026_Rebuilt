@@ -20,7 +20,6 @@ public class ShooterOne extends Command {
     addRequirements(RobotContainer.shooterSubsystem);
     addRequirements(RobotContainer.LimeLightSubsystem);
 
-    
   }
 
   public static boolean shooterRunning = true;
@@ -28,7 +27,6 @@ public class ShooterOne extends Command {
   public String Adescription = "none";
   public String Bdescription = "none";
   public String CurrentDescription = "null";
-
 
   // Called when the command is initially scheduled.
   @Override
@@ -41,52 +39,31 @@ public class ShooterOne extends Command {
 
     System.out.println(shooterRunning);
 
-    SmartDashboard.putNumber("Limelight TY",RobotContainer.LimeLightSubsystem.ty);
+    SmartDashboard.putNumber("Limelight TY", RobotContainer.LimeLightSubsystem.ty);
     SmartDashboard.putNumber("Shooter top speed", RobotContainer.shooterSubsystem.shooterTop.get());
-    SmartDashboard.putNumber("Shooter bottom speed",RobotContainer.shooterSubsystem.shooterBottom.get());
-    // SmartDashboard.putString("AB testing", ABtesting);
-    // SmartDashboard.putString("Description", CurrentDescription);
-    
-    //AB testing
-    // if (RobotContainer.operatorController.getRawButtonPressed(4)){
-    //   if (ABtesting == "A"){
-    //     ABtesting = "B";
-    //   } else {
-    //     ABtesting = "A";
-    //   }
-    // }
-
-    // if (ABtesting == "A"){
-    //   CurrentDescription = Adescription;
-    // }
-
-    // if (ABtesting == "B"){
-    //   CurrentDescription = Bdescription;
-    // }
-
+    SmartDashboard.putNumber("Shooter bottom speed", RobotContainer.shooterSubsystem.shooterBottom.get());
+  
 
     double ty = RobotContainer.LimeLightSubsystem.ty;
-    if (ty != 0){ //if it sees an april tag
-  
-      // if (ABtesting == "A"){
-      // Adescription = "linear";
+    if (ty != 0) { // if it sees an april tag
 
-      
-     RobotContainer.shooterSubsystem.shooterTop.set(-0.034*ty+0.553); //both powers were increased by 0.1 on 3/19/26 at 3:35 pm
-     RobotContainer.shooterSubsystem.shooterBottom.set(0.011*ty-0.648);
-     shooterRunning = true;
-      }
-         if (RobotContainer.operatorController.getRawButton(11)){
+    
+      RobotContainer.shooterSubsystem.shooterTop.set(-0.034 * ty + 0.553); // both powers were increased by 0.1 on
+                                                                           // 3/19/26 at 3:35 pm
+      RobotContainer.shooterSubsystem.shooterBottom.set(0.011 * ty - 0.648);
+      shooterRunning = true;
+    }
+    if (RobotContainer.operatorController.getRawButton(11)) {
       RobotContainer.shooterSubsystem.shooterTop.set(0.4);
-     RobotContainer.shooterSubsystem.shooterBottom.set(-0.4);
-         }
-      if (RobotContainer.operatorController.getRawButton(1) /*  && RobotContainer.ShooterOne.shooterRunning == true*/){
-        System.out.println("shooting");
-        ShooterSubsystem.spindexerSpeed = ShooterSubsystem.SPINDEXER_POWER;
-        ShooterSubsystem.kickerSpeed = ShooterSubsystem.KICKER_POWER;
-    } else if (RobotContainer.operatorController.getRawButton(2) && RobotContainer.operatorController.getRawButton(1) ){
-      ShooterSubsystem.spindexerSpeed = -0.5 * ShooterSubsystem.SPINDEXER_POWER; //Reduces power in reverse
-      ShooterSubsystem.kickerSpeed = -0.5 * ShooterSubsystem.KICKER_POWER;  //Reduces power in reverse
+      RobotContainer.shooterSubsystem.shooterBottom.set(-0.4);
+    }
+    if (RobotContainer.operatorController.getRawButton(1) /* && RobotContainer.ShooterOne.shooterRunning == true */) {
+      System.out.println("shooting");
+      ShooterSubsystem.spindexerSpeed = ShooterSubsystem.SPINDEXER_POWER;
+      ShooterSubsystem.kickerSpeed = ShooterSubsystem.KICKER_POWER;
+    } else if (RobotContainer.operatorController.getRawButton(2) && RobotContainer.operatorController.getRawButton(1)) {
+      ShooterSubsystem.spindexerSpeed = -0.5 * ShooterSubsystem.SPINDEXER_POWER; // Reduces power in reverse
+      ShooterSubsystem.kickerSpeed = -0.5 * ShooterSubsystem.KICKER_POWER; // Reduces power in reverse
     } else {
       ShooterSubsystem.spindexerSpeed = 0;
       ShooterSubsystem.kickerSpeed = 0;
@@ -94,25 +71,19 @@ public class ShooterOne extends Command {
     }
 
     shooterRunning = true;
-      
-       /*  else */ if (RobotContainer.operatorController.getRawButton(12)){
-          RobotContainer.shooterSubsystem.shooterTop.set(0.8);
-          RobotContainer.shooterSubsystem.shooterBottom.set(-0.6); 
 
+    /* else */ if (RobotContainer.operatorController.getRawButton(12)) {
+      RobotContainer.shooterSubsystem.shooterTop.set(0.8);
+      RobotContainer.shooterSubsystem.shooterBottom.set(-0.6);
 
+    }
 
-        }
-
-    //  } else {
-      // Bdescription = "cubic";
-      // RobotContainer.shooterSubsystem.shooterTop.set(-0.000205039*ty*ty*ty+0.00695272*ty*ty-0.0932683*ty+0.568311);
-      // RobotContainer.shooterSubsystem.shooterBottom.set(-(0.000292744*ty*ty*ty+0.0081225*ty*ty-0.0727252*ty+0.658441));
-      }
-   // }
-
-    
-  
-
+    // } else {
+    // Bdescription = "cubic";
+    // RobotContainer.shooterSubsystem.shooterTop.set(-0.000205039*ty*ty*ty+0.00695272*ty*ty-0.0932683*ty+0.568311);
+    // RobotContainer.shooterSubsystem.shooterBottom.set(-(0.000292744*ty*ty*ty+0.0081225*ty*ty-0.0727252*ty+0.658441));
+  }
+  // }
 
   // Called once the command ends or is interrupted.
   @Override

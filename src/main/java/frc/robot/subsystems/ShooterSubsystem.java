@@ -67,8 +67,8 @@ public boolean forceSlowMode = false;
     // shooterTop.set(topManualPower);
     // shooterBottom.set(bottomManualPower);
     // } else {
-    kicker.set(kickerSpeed);
-    spindexer.set(spindexerSpeed);
+    //kicker.set(kickerSpeed);
+    //spindexer.set(spindexerSpeed);
 
 
     // }

@@ -33,6 +33,7 @@ import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.NullCommand;
 import frc.robot.commands.RevUp;
 import frc.robot.commands.ShooterOne;
+import frc.robot.commands.ShooterTwo;
 import frc.robot.commands.TeleOpTurret;
 import frc.robot.commands.AutoTurretLeft;
 import frc.robot.commands.TeleOpTurret;
@@ -157,7 +158,7 @@ public class RobotContainer {
     public static final TeleOpTurret teleOpTurret = new TeleOpTurret();
     public static final IntakeCommand intakeCommand = new IntakeCommand();
     public static final OuttakeCommand outtakeCommand = new OuttakeCommand();
-  
+    public static final ShooterTwo shooterTwo = new ShooterTwo();
 
     
 
@@ -249,7 +250,7 @@ public class RobotContainer {
       );
 
       m_operatorController.axisLessThan(3, 0.8).whileTrue(
-        ShooterOne);
+        shooterTwo);
 
 
       //m_commandXboxController.a().onTrue(climbCommand);
