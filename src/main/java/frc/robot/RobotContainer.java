@@ -36,6 +36,7 @@ import frc.robot.commands.ShooterOne;
 import frc.robot.commands.ShooterTwo;
 import frc.robot.commands.TeleOpTurret;
 import frc.robot.commands.AutoTurretLeft;
+import frc.robot.commands.AutoTurretRight;
 import frc.robot.commands.TeleOpTurret;
 import frc.robot.commands.ResetTurret;
 import frc.robot.commands.IntakeCommand;
@@ -150,11 +151,12 @@ public class RobotContainer {
     public static final DriveCommand driveCommand = new DriveCommand();
     public static final ShooterOne ShooterOne = new ShooterOne();
     public static final ClimbCommand climbCommand = new ClimbCommand();
-    public static final AutoShoot autoShoot = new AutoShoot();
+    public static final AutoShoot autoShootEightFeet = new AutoShoot(0.4, -0.4);
     public static final ClimbUp climbUp = new ClimbUp();
     public static final ClimbDown climbDown = new ClimbDown();
     public static final RevUp revUp = new RevUp();
     public static final AutoTurretLeft autoTurretLeft = new AutoTurretLeft();
+    public static final AutoTurretRight autoTurretRight = new AutoTurretRight();
     public static final NullCommand nullCommand = new NullCommand();
     public static final TeleOpTurret teleOpTurret = new TeleOpTurret();
     public static final IntakeCommand intakeCommand = new IntakeCommand();
@@ -189,10 +191,12 @@ public class RobotContainer {
     NamedCommands.registerCommand("Reverse", autonPath("Reverse"));
     
     //Path Planner Commands
-    NamedCommands.registerCommand("AutoShoot", autoShoot);
+    NamedCommands.registerCommand("AutoShootEightFeet", autoShootEightFeet);
     NamedCommands.registerCommand("RevUp", revUp);
-    NamedCommands.registerCommand("AutoTurret", autoTurretLeft);
+    NamedCommands.registerCommand("AutoTurretLeft", autoTurretLeft);
+    NamedCommands.registerCommand("AutoTurretRight", autoTurretRight);
     NamedCommands.registerCommand("NullCommand", nullCommand);
+    NamedCommands.registerCommand("Intake", intakeCommand);
 
     // Configure the button bindings
     configureButtonBindings();

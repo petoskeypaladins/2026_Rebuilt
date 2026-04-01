@@ -14,10 +14,13 @@ import com.pathplanner.lib.config.RobotConfig;
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class AutoShoot extends Command {
   /** Creates a new AutoShoot. */
-  public AutoShoot() {
+  double top;
+  double bottom;
+  public AutoShoot(double topSpeed, double bottomSpeed) {
     // Use addRequirements() here to declare subsystem dependencies.
 addRequirements(RobotContainer.shooterSubsystem);
-
+    top = topSpeed;
+    bottom = bottomSpeed;
 
   }
 
@@ -32,8 +35,8 @@ double tick = 0;
 
 
 
-    RobotContainer.shooterSubsystem.shooterTop.set(0.4);
-    RobotContainer.shooterSubsystem.shooterBottom.set(-0.4);
+    RobotContainer.shooterSubsystem.shooterTop.set(/*0.4*/ top);
+    RobotContainer.shooterSubsystem.shooterBottom.set(/*-0.4*/ bottom);
     RobotContainer.shooterSubsystem.spindexer.set(0.4);
    RobotContainer.shooterSubsystem.kicker.set(0.95);
   }

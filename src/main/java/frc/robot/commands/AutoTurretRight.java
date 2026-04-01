@@ -10,9 +10,9 @@ import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TurretSubsystem;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class AutoTurretLeft extends Command {
+public class AutoTurretRight extends Command {
   /** Creates a new AutoTurret. */
-  public AutoTurretLeft() {
+  public AutoTurretRight() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(RobotContainer.TurretSubsystem);
   }
@@ -30,10 +30,10 @@ boolean done = false;
 
 
   public void execute() {
-  
+    
 
-    if (TurretSubsystem.m_turretEncoder.getPosition() >= -3.85) {
-      TurretSubsystem.turretRotate.set(-0.2);
+    if (TurretSubsystem.m_turretEncoder.getPosition() <= 2) {
+      TurretSubsystem.turretRotate.set(0.2);
       done = false;
 
     } else {
