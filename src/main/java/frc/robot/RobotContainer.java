@@ -40,6 +40,7 @@ import frc.robot.commands.TeleOpTurret;
 import frc.robot.commands.ResetTurret;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.OuttakeCommand;
+import frc.robot.commands.ResetTurret;
 //import robot subsystems
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakeSubsystem;
@@ -159,6 +160,7 @@ public class RobotContainer {
     public static final IntakeCommand intakeCommand = new IntakeCommand();
     public static final OuttakeCommand outtakeCommand = new OuttakeCommand();
     public static final ShooterTwo shooterTwo = new ShooterTwo();
+    public static final ResetTurret resetTurret = new ResetTurret();
 
     
 
@@ -253,11 +255,12 @@ public class RobotContainer {
       m_operatorController.axisLessThan(3, 0.8).whileTrue(
         shooterTwo);
 
+    m_operatorController.button(5).onTrue(resetTurret);
 
       //m_commandXboxController.a().onTrue(climbCommand);
       m_commandXboxController.a().whileTrue(climbDown);
       m_commandXboxController.b().whileTrue(climbUp);
-      m_operatorController.button(3).whileTrue(teleOpTurret);
+      m_operatorController.button(8).whileTrue(teleOpTurret);
   }
 
   

@@ -13,6 +13,7 @@ import frc.robot.commands.AutoShoot;
 import frc.robot.commands.AutoTurretLeft;
 import frc.robot.commands.NullCommand;
 import frc.robot.commands.NullIntake;
+import frc.robot.commands.ResetTurret;
 import frc.robot.commands.ShooterOne;
 import frc.robot.commands.ShooterTwo;
 import frc.robot.commands.TeleOpTurret;
@@ -79,6 +80,7 @@ public class Robot extends TimedRobot {
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       CommandScheduler.getInstance().schedule(m_autonomousCommand);
+
       //  03-28-26: Commented out 83 and 84 to prevent unwanted movement when testing ramp precision
       // RobotContainer.TurretSubsystem.setDefaultCommand(new AutoTurretLeft());
       // RobotContainer.shooterSubsystem.setDefaultCommand(new AutoShoot());
@@ -120,3 +122,4 @@ public class Robot extends TimedRobot {
   @Override
   public void testPeriodic() {}
 }
+

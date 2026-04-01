@@ -24,6 +24,7 @@ import com.revrobotics.spark.SparkAbsoluteEncoder;
 import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkFlex;
 import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.SparkRelativeEncoder;
 import com.revrobotics.spark.SparkBase.ControlType;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
@@ -56,7 +57,7 @@ public class TurretSubsystem extends SubsystemBase {
 
   public static final SparkFlex turretRotate = new SparkFlex(
       Constants.MechConstants.turretRotateCanID, MotorType.kBrushless);
-  public static final SparkAbsoluteEncoder m_turretEncoder = turretRotate.getAbsoluteEncoder();
+  public static final RelativeEncoder m_turretEncoder = turretRotate.getEncoder();
   public static final SparkClosedLoopController m_turretController = turretRotate.getClosedLoopController();
   //m_turretController.setSetpoint(setPoint, ControlType.
     private double speed;
