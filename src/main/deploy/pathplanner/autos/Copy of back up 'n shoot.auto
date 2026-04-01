@@ -5,6 +5,12 @@
     "data": {
       "commands": [
         {
+          "type": "path",
+          "data": {
+            "pathName": "Don't crash the code"
+          }
+        },
+        {
           "type": "named",
           "data": {
             "name": "ResetTurret"
