@@ -63,12 +63,16 @@ public class TeleOpTurret extends Command {
         if (TurretSubsystem.m_turretEncoder.getPosition() >= lowerLimit) {
           // auto adjust the turret in the minus direction
           TurretSubsystem.setTurretSpeed(-0.05);
+        } else {
+          TurretSubsystem.setTurretSpeed(0);
         }
       } else if (tx > 3) { // if the turret is to the left of the aprilTag...
         if (TurretSubsystem.m_turretEncoder.getPosition() <= upperLimit) {
           // auto adjust the turret in the positive direction, aka clockwise, aka to the
           // right
           TurretSubsystem.setTurretSpeed(0.05);
+        } else {
+          TurretSubsystem.setTurretSpeed(0);
         }
       }
     } else {

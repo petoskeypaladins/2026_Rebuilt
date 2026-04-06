@@ -21,7 +21,6 @@ public class AutoShoot extends Command {
 addRequirements(RobotContainer.shooterSubsystem);
     top = topSpeed;
     bottom = bottomSpeed;
-
   }
 
 double tick = 0;

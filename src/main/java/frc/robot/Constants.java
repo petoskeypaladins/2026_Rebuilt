@@ -60,8 +60,6 @@ public final class Constants {
     // SPARK MAX CAN IDs
 
     /*Assign every corner to the tens-place of the canID and drive and turn to the ones-place
-     *
-     * 
      */
     public static final int kFrontLeftDrivingCanId = 11;
     public static final int kRearLeftDrivingCanId = 31;
@@ -73,11 +71,9 @@ public final class Constants {
     public static final int kFrontRightTurningCanId = 22;
     public static final int kRearRightTurningCanId = 42;
 
-    
-
     public static final boolean kGyroReversed = true;
   }
-  
+
   public static final class MechConstants {
 
     public static final int turretRotateCanID = 51;   //change this later

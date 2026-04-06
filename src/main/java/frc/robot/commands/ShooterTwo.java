@@ -21,8 +21,7 @@ public class ShooterTwo extends Command {
   /** Creates a new ShooterTwo. */
   public ShooterTwo() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(RobotContainer.shooterSubsystem);
-    addRequirements(RobotContainer.LimeLightSubsystem);
+    addRequirements(RobotContainer.shooterSubsystem);  
   }
 
   //variable declaration
@@ -37,13 +36,15 @@ public class ShooterTwo extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+
+    System.out.println("shooting");
   
     if (RobotContainer.operatorController.getRawButton(1)){
         RobotContainer.shooterSubsystem.kicker.set(0.3); 
-        RobotContainer.shooterSubsystem.spindexer.set(0.4);
+        RobotContainer.shooterSubsystem.spindexer.set(0.6);
     } else if (RobotContainer.operatorController.getRawButton(2)){
         RobotContainer.shooterSubsystem.kicker.set(-0.3);
-        RobotContainer.shooterSubsystem.spindexer.set(-0.4);
+        RobotContainer.shooterSubsystem.spindexer.set(-0.6);
     } else {
         RobotContainer.shooterSubsystem.kicker.set(0);
         RobotContainer.shooterSubsystem.spindexer.set(0);
@@ -74,6 +75,7 @@ public class ShooterTwo extends Command {
   public void end(boolean interrupted) {
     RobotContainer.shooterSubsystem.shooterTop.set(0);
     RobotContainer.shooterSubsystem.shooterBottom.set(0);
+    System.out.println("interrupted");
   }
 
   // Returns true when the command should end.

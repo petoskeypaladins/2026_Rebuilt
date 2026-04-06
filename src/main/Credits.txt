@@ -1,0 +1,33 @@
+Credits:
+
+Written by the Petoskey Paladins, FRC team 3618.
+
+
+Students:
+
+Henry Burris (Github: Henry-3618)
+Georiga gardner
+Jacob Morency
+Adam Cross
+Landon Overton
+
+
+Mentors:
+
+Karen Drake
+Tristian Werden
+Cory Carlson
+
+
+References:
+
+REV robotics (Swerve Drive Template)
+Team 1792 (Turret tracking calcluations)
+WPILIb
+And the authors of all libraries used (see RobotContainer)
+
+
+Libraries Copyright (c) FIRST and other WPILib contributors.
+This is an open source software. Terms of use are listed in WPILib-license.md
+
+Copyright 2026 team 3618
