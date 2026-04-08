@@ -15,7 +15,7 @@ import java.util.*;
 
 import javax.lang.model.util.ElementScanner14;
 
-
+@SuppressWarnings("unused")
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class ShooterTwo extends Command {
   /** Creates a new ShooterTwo. */
@@ -37,6 +37,8 @@ public class ShooterTwo extends Command {
   @Override
   public void execute() {
 
+
+
     System.out.println("shooting");
   
     if (RobotContainer.operatorController.getRawButton(1)){
@@ -52,8 +54,8 @@ public class ShooterTwo extends Command {
   
     ty = RobotContainer.LimeLightSubsystem.ty;
     if (ty != 0){
-      lastSpeedTop = -0.010*ty + 0.316;
-      lastSpeedBottom = 0.013*ty - 0.504;
+      lastSpeedTop = -0.015*ty + 0.316;  //-0.010*ty + 0.316; old values
+      lastSpeedBottom = 0.018*ty - 0.504; //0.013*ty - 0.504; old values
     }
 
     if (RobotContainer.operatorController.getRawButton(11)){
@@ -68,6 +70,10 @@ public class ShooterTwo extends Command {
       RobotContainer.shooterSubsystem.shooterTop.set(lastSpeedTop);
       RobotContainer.shooterSubsystem.shooterBottom.set(lastSpeedBottom);
     }
+
+    SmartDashboard.putNumber("Shooter top speed", lastSpeedTop);
+    SmartDashboard.putNumber("Shooter bottom speed", lastSpeedBottom);
+
   }
 
   // Called once the command ends or is interrupted.

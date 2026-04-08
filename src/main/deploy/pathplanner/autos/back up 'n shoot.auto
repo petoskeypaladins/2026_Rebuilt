@@ -9,12 +9,6 @@
           "data": {
             "commands": [
               {
-                "type": "path",
-                "data": {
-                  "pathName": "Hello, World!"
-                }
-              },
-              {
                 "type": "named",
                 "data": {
                   "name": "RevUp"

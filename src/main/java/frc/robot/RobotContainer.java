@@ -42,6 +42,7 @@ import frc.robot.commands.TeleOpTurret;
 import frc.robot.commands.ResetTurret;
 import frc.robot.commands.IntakeCommand;
 import frc.robot.commands.OuttakeCommand;
+import frc.robot.commands.ResetGyro;
 import frc.robot.commands.ResetTurret;
 //import robot subsystems
 import frc.robot.subsystems.DriveSubsystem;
@@ -164,7 +165,8 @@ public class RobotContainer {
     public static final OuttakeCommand outtakeCommand = new OuttakeCommand();
     public static final ShooterTwo shooterTwo = new ShooterTwo();
     public static final ResetTurret resetTurret = new ResetTurret();
- 
+    public static final ResetGyro resetGyro = new ResetGyro();
+    
 
     
 
@@ -191,7 +193,9 @@ public class RobotContainer {
       //ZPaths 
     NamedCommands.registerCommand("Hello, World!", autonPath("Hello, World!"));
     NamedCommands.registerCommand("Reverse", autonPath("Reverse"));
-    
+    NamedCommands.registerCommand("Go to balls", autonPath("Go to balls"));
+    NamedCommands.registerCommand("Home Depot", autonPath("Home Depot"));
+
     //Path Planner Commands
     NamedCommands.registerCommand("AutoShootEightFeet", autoShootEightFeet);
     NamedCommands.registerCommand("RevUp", revUp);
@@ -199,6 +203,8 @@ public class RobotContainer {
     NamedCommands.registerCommand("AutoTurretRight", autoTurretRight);
     NamedCommands.registerCommand("NullCommand", nullCommand);
     NamedCommands.registerCommand("Intake", intakeCommand);
+    NamedCommands.registerCommand("ResetGyro", resetGyro);
+   
 
     // Configure the button bindings
     configureButtonBindings();
