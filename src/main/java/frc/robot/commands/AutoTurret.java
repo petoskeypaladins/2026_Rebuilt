@@ -9,14 +9,14 @@ import frc.robot.RobotContainer;
 import frc.robot.subsystems.TurretSubsystem;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class AutoTurretLeft extends Command {
+public class AutoTurret extends Command {
   /** Creates a new AutoTurret. */
 
   double target;
   double speed;
   boolean done = false;
 
-  public AutoTurretLeft(double turretTarget, double turretSpeed) {
+  public AutoTurret(double turretTarget, double turretSpeed) {
     addRequirements(RobotContainer.TurretSubsystem);
     target = turretTarget;
     speed = turretSpeed;
@@ -38,7 +38,6 @@ public class AutoTurretLeft extends Command {
     } else {
       TurretSubsystem.turretRotate.set(0);
       done = true;
-      cancel();
     }
   }
 

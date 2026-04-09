@@ -11,6 +11,18 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "ResetTurret"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "turretRightZero"
+          }
+        },
+        {
           "type": "race",
           "data": {
             "commands": [
@@ -32,13 +44,7 @@
         {
           "type": "named",
           "data": {
-            "name": "AutoTurretLeft"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "AutoShootEightFeet"
+            "name": "autoShootNineFeet"
           }
         }
       ]

@@ -54,8 +54,8 @@ public class ShooterTwo extends Command {
   
     ty = RobotContainer.LimeLightSubsystem.ty;
     if (ty != 0){
-      lastSpeedTop = -0.015*ty + 0.316;  //-0.010*ty + 0.316; old values
-      lastSpeedBottom = 0.018*ty - 0.504; //0.013*ty - 0.504; old values
+      lastSpeedTop = -0.012*ty + 0.362;  //-0.010*ty + 0.316; old values
+      lastSpeedBottom = 0.021*ty - 0.642; //0.013*ty - 0.504; old values
     }
 
     if (RobotContainer.operatorController.getRawButton(11)){

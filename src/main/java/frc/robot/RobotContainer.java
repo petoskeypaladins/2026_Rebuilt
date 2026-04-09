@@ -25,6 +25,7 @@ import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.AutoShoot;
+import frc.robot.commands.AutoTurret;
 import frc.robot.commands.ClimbCommand;
 import frc.robot.commands.ClimbDown;
 import frc.robot.commands.ClimbUp;
@@ -153,12 +154,15 @@ public class RobotContainer {
     public static final DriveCommand driveCommand = new DriveCommand();
     public static final ShooterOne ShooterOne = new ShooterOne();
     public static final ClimbCommand climbCommand = new ClimbCommand();
-    public static final AutoShoot autoShootEightFeet = new AutoShoot(0.4, -0.4);
+
+    public static final AutoShoot autoShootEightFeet = new AutoShoot(0.225, -0.4);
+    public static final AutoShoot autoShootNineFeet = new AutoShoot(0.325, -0.6);
+
     public static final ClimbUp climbUp = new ClimbUp();
     public static final ClimbDown climbDown = new ClimbDown();
     public static final RevUp revUp = new RevUp();
-    public static final AutoTurretLeft autoTurretLeft = new AutoTurretLeft();
-    public static final AutoTurretRight autoTurretRight = new AutoTurretRight();
+    public static final AutoTurretLeft turretleftNinety = new AutoTurretLeft(-3.85, -0.1);    
+    public static final AutoTurretRight turretRightZero = new AutoTurretRight(0.15, 0.1);  
     public static final NullCommand nullCommand = new NullCommand();
     public static final TeleOpTurret teleOpTurret = new TeleOpTurret();
     public static final IntakeCommand intakeCommand = new IntakeCommand();
@@ -166,6 +170,8 @@ public class RobotContainer {
     public static final ShooterTwo shooterTwo = new ShooterTwo();
     public static final ResetTurret resetTurret = new ResetTurret();
     public static final ResetGyro resetGyro = new ResetGyro();
+
+
     
 
     
@@ -198,9 +204,10 @@ public class RobotContainer {
 
     //Path Planner Commands
     NamedCommands.registerCommand("AutoShootEightFeet", autoShootEightFeet);
+    NamedCommands.registerCommand("AutoShootNineFeet", autoShootNineFeet);
     NamedCommands.registerCommand("RevUp", revUp);
-    NamedCommands.registerCommand("AutoTurretLeft", autoTurretLeft);
-    NamedCommands.registerCommand("AutoTurretRight", autoTurretRight);
+    NamedCommands.registerCommand("turretleftNinety", turretleftNinety);
+    NamedCommands.registerCommand("turretRightZero", turretRightZero);
     NamedCommands.registerCommand("NullCommand", nullCommand);
     NamedCommands.registerCommand("Intake", intakeCommand);
     NamedCommands.registerCommand("ResetGyro", resetGyro);
