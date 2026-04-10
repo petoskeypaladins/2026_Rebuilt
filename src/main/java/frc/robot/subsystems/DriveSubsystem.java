@@ -101,7 +101,7 @@ public class DriveSubsystem extends SubsystemBase {
             this::resetOdometry, // Method to reset odometry (will be called if your auto has a starting pose)
             this::getRobotRelativeSpeeds,
             (speeds, feedforwards) -> {
-              speeds.vxMetersPerSecond *= -1;
+              //speeds.vxMetersPerSecond *= -1;
               speeds.omegaRadiansPerSecond *= -1;
               driveRobotRelative(speeds);
              }, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE

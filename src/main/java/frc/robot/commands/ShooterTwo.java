@@ -31,7 +31,12 @@ public class ShooterTwo extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+      RobotContainer.shooterSubsystem.kicker.set(0); 
+      RobotContainer.shooterSubsystem.spindexer.set(0);
+      RobotContainer.shooterSubsystem.shooterTop.set(0);
+      RobotContainer.shooterSubsystem.shooterBottom.set(0);
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -54,8 +59,8 @@ public class ShooterTwo extends Command {
   
     ty = RobotContainer.LimeLightSubsystem.ty;
     if (ty != 0){
-      lastSpeedTop = -0.012*ty + 0.362;  //-0.010*ty + 0.316; old values
-      lastSpeedBottom = 0.021*ty - 0.642; //0.013*ty - 0.504; old values
+      lastSpeedTop = -0.012*ty + 0.462;  //-0.010*ty + 0.316; old values
+      lastSpeedBottom = 0.021*ty - 0.742; //0.013*ty - 0.504; old values
     }
 
     if (RobotContainer.operatorController.getRawButton(11)){
@@ -65,7 +70,9 @@ public class ShooterTwo extends Command {
     } else if (RobotContainer.operatorController.getRawButton(12)){
         RobotContainer.shooterSubsystem.shooterTop.set(0.8);
         RobotContainer.shooterSubsystem.shooterBottom.set(-0.6);
-
+    } else if (RobotContainer.operatorController.getRawButton(9)){ //twelvefeetwall
+      RobotContainer.shooterSubsystem.shooterTop.set(0.35);
+      RobotContainer.shooterSubsystem.shooterBottom.set(-0.6);
     } else {
       RobotContainer.shooterSubsystem.shooterTop.set(lastSpeedTop);
       RobotContainer.shooterSubsystem.shooterBottom.set(lastSpeedBottom);

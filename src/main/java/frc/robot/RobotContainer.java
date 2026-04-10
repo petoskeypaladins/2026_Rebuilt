@@ -131,6 +131,7 @@ import com.pathplanner.lib.util.swerve.SwerveSetpointGenerator;
  * periodic methods (other than the scheduler calls).  Instead, the structure of the robot
  * (including subsystems, commands, and button mappings) should be declared here.
  */
+
 @SuppressWarnings("unused")
 public class RobotContainer {
     
@@ -156,13 +157,16 @@ public class RobotContainer {
     public static final ClimbCommand climbCommand = new ClimbCommand();
 
     public static final AutoShoot autoShootEightFeet = new AutoShoot(0.225, -0.4);
-    public static final AutoShoot autoShootNineFeet = new AutoShoot(0.325, -0.6);
+    public static final AutoShoot autoShootNineFeet = new AutoShoot(0.35, -0.475);
+    public static final AutoShoot autoShootSixFeet = new AutoShoot(0.2, -0.35);
+    
+
 
     public static final ClimbUp climbUp = new ClimbUp();
     public static final ClimbDown climbDown = new ClimbDown();
     public static final RevUp revUp = new RevUp();
     public static final AutoTurretLeft turretleftNinety = new AutoTurretLeft(-3.85, -0.1);    
-    public static final AutoTurretRight turretRightZero = new AutoTurretRight(0.15, 0.1);  
+    public static final AutoTurretRight turretRightZero = new AutoTurretRight(0.4, 0.1);  
     public static final NullCommand nullCommand = new NullCommand();
     public static final TeleOpTurret teleOpTurret = new TeleOpTurret();
     public static final IntakeCommand intakeCommand = new IntakeCommand();
@@ -211,8 +215,8 @@ public class RobotContainer {
     NamedCommands.registerCommand("NullCommand", nullCommand);
     NamedCommands.registerCommand("Intake", intakeCommand);
     NamedCommands.registerCommand("ResetGyro", resetGyro);
+    NamedCommands.registerCommand("autoShootSixFeet", autoShootSixFeet);
    
-
     // Configure the button bindings
     configureButtonBindings();
 
@@ -231,18 +235,8 @@ public class RobotContainer {
                 MathUtil.applyDeadband(driverController.getRightX(), OIConstants.kDriveDeadband),
                 true), 
               robotDrive ));
-        
-              // LimeLightSubsystem.setDefaultCommand(
-              //   new ShooterOne()
-              // );
-
-              
 
   }
-
-
-
-
 
 /**
    * Use this method to define your button->command mappings. Buttons can be
@@ -254,10 +248,7 @@ public class RobotContainer {
    * {@link JoystickButton}.
    */
   private void configureButtonBindings() {
-    // new JoystickButton(driverController, Button.kR1.value)
-    //     .whileTrue(new RunCommand(
-    //         () -> robotDrive.setX(),
-    //         robotDrive));
+
       m_commandXboxController.pov(180).whileTrue(
         new RunCommand(
           () -> robotDrive.zeroHeading(), robotDrive)
@@ -320,41 +311,5 @@ public class RobotContainer {
   
     return AutoBuilder.followPath(path);
   }
-  //   // Create config for trajectory
-  //   TrajectoryConfig config = new TrajectoryConfig(
-  //       AutoConstants.kMaxSpeedMetersPerSecond,
-  //       AutoConstants.kMaxAccelerationMetersPerSecondSquared)
-  //       // Add kinematics to ensure max speed is actually obeyed
-  //       .setKinematics(DriveConstants.kDriveKinematics);
-
-  //       return autoChooser.getSelected();
-
-    // An example trajectory to follow. All units in meters.
-    // Trajectory exampleTrajectory = TrajectoryGenerator.generateTrajectory(
-    //     // Start at the origin facing the +X direction
-    //     new Pose2d(0, 0, new Rotation2d(0)),
-    //     // Pass through these two interior waypoints, making an 's' curve path
-    //     List.of(new Translation2d(1, 1), new Translation2d(2, -1)),
-    //     // End 3 meters straight ahead of where we started, facing forward
-    //     new Pose2d(3, 0, new Rotation2d(0)),
-    //     config);
-
-    // SwerveControllerCommand swerveControllerCommand = new SwerveControllerCommand(
-    //     ,
-    //     robotDrive::getPose, // Functional interface to feed supplier
-    //     DriveConstants.kDriveKinematics,
-
-    //     // Position controllers
-    //     new PIDController(AutoConstants.kPXController, 0, 0),
-    //     new PIDController(AutoConstants.kPYController, 0, 0),
-    //     thetaController,
-    //     robotDrive::setModuleStates,
-    //     robotDrive);
-
-    // Reset odometry to the starting pose of the trajectory.
-
-
-    // Run path following command, then stop at the end.
-   // return swerveControllerCommand.andThen(() -> robotDrive.drive(0, 0, 0, false));
   }
 

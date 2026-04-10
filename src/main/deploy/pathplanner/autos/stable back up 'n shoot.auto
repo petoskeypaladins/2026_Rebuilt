@@ -5,6 +5,18 @@
     "data": {
       "commands": [
         {
+          "type": "path",
+          "data": {
+            "pathName": "Hello, World!"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "turretleftNinety"
+          }
+        },
+        {
           "type": "race",
           "data": {
             "commands": [
@@ -13,14 +25,14 @@
                 "data": {
                   "name": "RevUp"
                 }
+              },
+              {
+                "type": "wait",
+                "data": {
+                  "waitTime": 2.0
+                }
               }
             ]
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "turretleftNinety"
           }
         },
         {

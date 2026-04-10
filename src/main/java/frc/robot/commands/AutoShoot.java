@@ -46,6 +46,8 @@ double tick = 0;
     TurretSubsystem.turretRotate.set(0);
     RobotContainer.shooterSubsystem.shooterTop.set(0);
     RobotContainer.shooterSubsystem.shooterBottom.set(0);   
+    RobotContainer.shooterSubsystem.kicker.set(0);
+    RobotContainer.shooterSubsystem.spindexer.set(0);
   }
 
   // Returns true when the command should end.
