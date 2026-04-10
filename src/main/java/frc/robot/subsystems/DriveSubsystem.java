@@ -212,8 +212,8 @@ public class DriveSubsystem extends SubsystemBase {
     }
 
     // Convert the commanded speeds into the correct units for the drivetrain
-    double xSpeedDelivered = xSpeed * DriveConstants.kMaxSpeedMetersPerSecond * speedmultiplier;
-    double ySpeedDelivered = ySpeed * DriveConstants.kMaxSpeedMetersPerSecond * speedmultiplier;
+    double xSpeedDelivered = 0.95* xSpeed * DriveConstants.kMaxSpeedMetersPerSecond * speedmultiplier;  //speeds x and y reduced
+    double ySpeedDelivered = 0.95 * ySpeed * DriveConstants.kMaxSpeedMetersPerSecond * speedmultiplier; //by 5 percent at Ferris
     double rotDelivered = -0.7 * rot * DriveConstants.kMaxAngularSpeed * speedmultiplier;
 
 
