@@ -19,6 +19,13 @@ import frc.robot.commands.ShooterTwo;
 import frc.robot.commands.TeleOpTurret;
 import frc.robot.subsystems.TurretSubsystem;
 
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.DriverStation;
+import java.lang.String;
+import java.math.RoundingMode;
+
+
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -107,10 +114,56 @@ public class Robot extends TimedRobot {
 
     
   }
-
-  /** This function is called periodically during operator control. */
+    //put the field info on the smartDashboard
+  int timeRemaining;
+  String shiftTimeRemaining;
+  String gameData;
+  boolean redActive; // true for red active, false for blue active
+  int shiftID;
+  boolean winnerActive;
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    timeRemaining = (int) edu.wpi.first.wpilibj.Timer.getMatchTime();
+    gameData = DriverStation.getGameSpecificMessage();
+    if (gameData.length() != 0){ // catch null pointers in the game data
+      if (gameData.charAt(0) == 'R'){
+        redActive = true;
+      } else if (gameData.charAt(0) == 'B') {
+        redActive = false;
+      } else {
+        System.out.println("um... what?");
+      }
+    } else {
+      System.out.println("you're not in a match dumbass");
+    }
+  SmartDashboard.putBoolean("Active alliance", redActive);
+  
+
+    if (timeRemaining != 0){ //check for null pointers in time remaining
+      if (timeRemaining > 140){
+        shiftTimeRemaining = "AUTO";
+        winnerActive = true;
+      } else if (timeRemaining > 135) {
+        shiftTimeRemaining = "TRANSITION";
+        winnerActive = true;
+      } else if (timeRemaining > 110){  
+        shiftTimeRemaining = String.valueOf(timeRemaining - 85);
+        winnerActive = false;
+      } else if (timeRemaining > 60){
+        shiftTimeRemaining = String.valueOf(timeRemaining - 35);
+      } else if (timeRemaining > 30) {
+        shiftTimeRemaining = "TRANSITION";
+        winnerActive = true;
+      } else {
+        shiftTimeRemaining = String.valueOf(timeRemaining);
+        winnerActive = true;
+      }
+
+    }
+
+  }
+
+  
 
   @Override
   public void testInit() {

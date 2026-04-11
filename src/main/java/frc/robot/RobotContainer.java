@@ -132,7 +132,7 @@ import com.pathplanner.lib.util.swerve.SwerveSetpointGenerator;
  * (including subsystems, commands, and button mappings) should be declared here.
  */
 
-@SuppressWarnings("unused")
+//@SuppressWarnings("unused")
 public class RobotContainer {
     
     public static boolean climbBottomedOut;
@@ -156,6 +156,7 @@ public class RobotContainer {
     public static final ShooterOne ShooterOne = new ShooterOne();
     public static final ClimbCommand climbCommand = new ClimbCommand();
 
+
     public static final AutoShoot autoShootEightFeet = new AutoShoot(0.225, -0.4);
     public static final AutoShoot autoShootNineFeet = new AutoShoot(0.35, -0.475);
     public static final AutoShoot autoShootSixFeet = new AutoShoot(0.2, -0.35);
@@ -165,8 +166,11 @@ public class RobotContainer {
     public static final ClimbUp climbUp = new ClimbUp();
     public static final ClimbDown climbDown = new ClimbDown();
     public static final RevUp revUp = new RevUp();
+
     public static final AutoTurretLeft turretleftNinety = new AutoTurretLeft(-3.85, -0.1);    
     public static final AutoTurretRight turretRightZero = new AutoTurretRight(0.4, 0.1);  
+    public static final AutoTurretLeft turretLeftTrench = new AutoTurretLeft(-0.4, -0.1);
+
     public static final NullCommand nullCommand = new NullCommand();
     public static final TeleOpTurret teleOpTurret = new TeleOpTurret();
     public static final IntakeCommand intakeCommand = new IntakeCommand();
@@ -212,9 +216,11 @@ public class RobotContainer {
     NamedCommands.registerCommand("RevUp", revUp);
     NamedCommands.registerCommand("turretleftNinety", turretleftNinety);
     NamedCommands.registerCommand("turretRightZero", turretRightZero);
+    NamedCommands.registerCommand("turretLeftTrench", turretLeftTrench);
     NamedCommands.registerCommand("NullCommand", nullCommand);
     NamedCommands.registerCommand("Intake", intakeCommand);
     NamedCommands.registerCommand("ResetGyro", resetGyro);
+
     NamedCommands.registerCommand("autoShootSixFeet", autoShootSixFeet);
    
     // Configure the button bindings

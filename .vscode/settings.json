@@ -61,6 +61,6 @@
   "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx2G -Xms100m -Xlog:disable",
   "wpilib.autoStartRioLog": true,
   "notebook.stickyScroll.enabled": false,
-  "editor.hover.sticky": false,
+  "editor.hover.sticky": true,
   "editor.stickyScroll.enabled": true
 }
