@@ -24,7 +24,7 @@ public class IntakeCommand extends Command {
   @Override
   public void execute() {
     System.out.println("intaking");
-      IntakeSubsystem.intakeSpeed = 0.8;
+      IntakeSubsystem.intakeSpeed = 0.8 ;
   }
 
   // Called once the command ends or is interrupted.

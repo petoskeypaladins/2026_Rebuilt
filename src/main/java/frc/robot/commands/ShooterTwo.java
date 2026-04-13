@@ -72,7 +72,7 @@ public class ShooterTwo extends Command {
         RobotContainer.shooterSubsystem.shooterBottom.set(-0.6);
     } else if (RobotContainer.operatorController.getRawButton(9)){ //twelvefeetwall
       RobotContainer.shooterSubsystem.shooterTop.set(0.35);
-      RobotContainer.shooterSubsystem.shooterBottom.set(-0.6);
+      RobotContainer.shooterSubsystem.shooterBottom.set(-0.475);
     } else {
       RobotContainer.shooterSubsystem.shooterTop.set(lastSpeedTop);
       RobotContainer.shooterSubsystem.shooterBottom.set(lastSpeedBottom);

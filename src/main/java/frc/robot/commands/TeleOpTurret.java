@@ -21,8 +21,8 @@ public class TeleOpTurret extends Command {
   // upper limit (right): +3
   // Lower limit (left): -5
 
-  public double upperLimit = 3.0;
-  public double lowerLimit = -5.0;
+  public double upperLimit = 1.5;
+  public double lowerLimit = -9.0;
   public double tx;
 
   // Called when the command is initially scheduled.
