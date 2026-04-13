@@ -30,6 +30,9 @@ import frc.robot.Constants.DriveConstants;
 import frc.robot.LimelightHelpers.LimelightResults;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+
+import com.ctre.phoenix6.hardware.Pigeon2;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.config.PIDConstants;
 import com.pathplanner.lib.config.RobotConfig;
@@ -58,7 +61,8 @@ public class DriveSubsystem extends SubsystemBase {
       DriveConstants.kBackRightChassisAngularOffset);
 
   // The gyro sensor
-  public final ADIS16470_IMU m_gyro = new ADIS16470_IMU();
+  //public final ADIS16470_IMU m_gyro = new ADIS16470_IMU();  <- gyro is unc
+  public final Pigeon2 m_gyro = new Pigeon2(DriveConstants.pigeonCanId);
 
 
 
@@ -70,7 +74,8 @@ public class DriveSubsystem extends SubsystemBase {
   // Odometry class for tracking robot pose
   SwerveDriveOdometry m_odometry = new SwerveDriveOdometry(
       DriveConstants.kDriveKinematics,
-      Rotation2d.fromDegrees(m_gyro.getAngle(IMUAxis.kZ)),
+      // Rotation2d.fromDegrees(m_gyro.getAngle(IMUAxis.kZ)),
+      m_gyro.getRotation2d(),
       new SwerveModulePosition[] {
           m_frontLeft.getPosition(),
           m_frontRight.getPosition(),
@@ -102,7 +107,7 @@ public class DriveSubsystem extends SubsystemBase {
             this::getRobotRelativeSpeeds,
             (speeds, feedforwards) -> {
               //speeds.vxMetersPerSecond *= -1;
-              speeds.omegaRadiansPerSecond *= -1;
+              speeds.omegaRadiansPerSecond *= /*-1*/ 1;
               driveRobotRelative(speeds);
              }, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
            // this::drive, // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds
@@ -127,7 +132,7 @@ public class DriveSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
 
-    SmartDashboard.putNumber("robot heading", m_gyro.getAngle(IMUAxis.kZ));
+    SmartDashboard.putNumber("robot heading", /*m_gyro.getAngle(IMUAxis.kZ)*/ m_gyro.getRotation2d().getDegrees());
 
     //     if ((ShooterSubsystem.shooterTop.getAppliedOutput() != 0) || (ShooterSubsystem.shooterBottom.getAppliedOutput() != 0)){
     //   forceslowmode = true;
@@ -138,7 +143,8 @@ public class DriveSubsystem extends SubsystemBase {
 
     // Update the odometry in the periodic block
     m_odometry.update(
-        Rotation2d.fromDegrees(m_gyro.getAngle(IMUAxis.kZ)),
+        // Rotation2d.fromDegrees(m_gyro.getAngle(IMUAxis.kZ)),
+        m_gyro.getRotation2d(),
         new SwerveModulePosition[] {
             m_frontLeft.getPosition(),
             m_frontRight.getPosition(),
@@ -178,7 +184,8 @@ public class DriveSubsystem extends SubsystemBase {
    */
   public void resetOdometry(Pose2d pose) {
     m_odometry.resetPosition(
-        Rotation2d.fromDegrees(m_gyro.getAngle(IMUAxis.kZ)),
+       // Rotation2d.fromDegrees(m_gyro.getAngle(IMUAxis.kZ)),
+       m_gyro.getRotation2d(),
         new SwerveModulePosition[] {
             m_frontLeft.getPosition(),
             m_frontRight.getPosition(),
@@ -226,7 +233,8 @@ public class DriveSubsystem extends SubsystemBase {
     var swerveModuleStates = DriveConstants.kDriveKinematics.toSwerveModuleStates(
         fieldRelative
             ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeedDelivered, ySpeedDelivered, rotDelivered,
-                Rotation2d.fromDegrees(-m_gyro.getAngle(IMUAxis.kZ)))
+               // Rotation2d.fromDegrees(-m_gyro.getAngle(IMUAxis.kZ)))
+               m_gyro.getRotation2d())
             : new ChassisSpeeds(xSpeedDelivered, ySpeedDelivered, rotDelivered));
 
     SwerveDriveKinematics.desaturateWheelSpeeds(
@@ -299,7 +307,15 @@ public class DriveSubsystem extends SubsystemBase {
    * @return the robot's heading in degrees, from -180 to 180
    */
   public double getHeading() {
-    return Rotation2d.fromDegrees(m_gyro.getAngle(IMUAxis.kZ)).getDegrees();
+    //return Rotation2d.fromDegrees(m_gyro.getAngle(IMUAxis.kZ)).getDegrees();
+    //return m_gyro.getRotation2d().getDegrees();
+    double rawNewAngle = m_gyro.getRotation2d().getDegrees();
+    double modAngle = rawNewAngle %360;
+    if (modAngle < 180) {
+      return modAngle;
+    } else {
+      return modAngle - 360;
+    }
 
 
   }
@@ -310,6 +326,7 @@ public class DriveSubsystem extends SubsystemBase {
    * @return The turn rate of the robot, in degrees per second
    */
   public double getTurnRate() {
-    return m_gyro.getRate(IMUAxis.kZ) * (DriveConstants.kGyroReversed ? -1.0 : 1.0);
+    //return m_gyro.getRate(IMUAxis.kZ) * (DriveConstants.kGyroReversed ? -1.0 : 1.0);
+    return m_gyro.getAngularVelocityZDevice().getValueAsDouble() * (DriveConstants.kGyroReversed ? -1.0 : 1.0);
   }
 }

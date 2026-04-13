@@ -72,6 +72,9 @@ public final class Constants {
     public static final int kRearRightTurningCanId = 42;
 
     public static final boolean kGyroReversed = true;
+
+    public static final int pigeonCanId = 9;
+
   }
 
   public static final class MechConstants {

@@ -132,7 +132,7 @@ import com.pathplanner.lib.util.swerve.SwerveSetpointGenerator;
  * (including subsystems, commands, and button mappings) should be declared here.
  */
 
-//@SuppressWarnings("unused")
+@SuppressWarnings("unused")
 public class RobotContainer {
     
     public static boolean climbBottomedOut;
