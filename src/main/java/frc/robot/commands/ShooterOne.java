@@ -48,9 +48,9 @@ public class ShooterOne extends Command {
     if (ty != 0) { // if it sees an april tag
 
     
-      RobotContainer.shooterSubsystem.shooterTop.set(-0.034 * ty + 0.553); // both powers were increased by 0.1 on
+      RobotContainer.shooterSubsystem.shooterTop.set(-0.034 * ty + 0.353); // both powers were increased by 0.1 on
                                                                            // 3/19/26 at 3:35 pm
-      RobotContainer.shooterSubsystem.shooterBottom.set(0.011 * ty - 0.648);
+      RobotContainer.shooterSubsystem.shooterBottom.set(0.011 * ty - 0.448);
       shooterRunning = true;
     }
     if (RobotContainer.operatorController.getRawButton(11)) {

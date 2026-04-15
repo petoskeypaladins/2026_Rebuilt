@@ -5,9 +5,9 @@
     "data": {
       "commands": [
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "Home Depot"
+            "name": "ResetGyro"
           }
         },
         {
@@ -61,13 +61,25 @@
           }
         },
         {
-          "type": "parallel",
+          "type": "path",
+          "data": {
+            "pathName": "Go to balls"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Turn 180"
+          }
+        },
+        {
+          "type": "race",
           "data": {
             "commands": [
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Go to balls"
+                  "pathName": "Ball turn right"
                 }
               },
               {

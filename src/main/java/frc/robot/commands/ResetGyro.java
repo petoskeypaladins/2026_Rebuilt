@@ -10,7 +10,8 @@ import frc.robot.RobotContainer;
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class ResetGyro extends Command {
   /** Creates a new ResetGyro. */
-  public ResetGyro() {
+  double setDirection;
+  public ResetGyro(double direction) {
     // Use addRequirements() here to declare subsystem dependencies.
   }
 

@@ -158,7 +158,7 @@ public class RobotContainer {
 
 
     public static final AutoShoot autoShootEightFeet = new AutoShoot(0.225, -0.4);
-    public static final AutoShoot autoShootNineFeet = new AutoShoot(0.35, -0.475);
+    public static final AutoShoot autoShootNineFeet = new AutoShoot(0.325, -0.425);  //works from the trench  //old numbers: 0.35, -0.475
     public static final AutoShoot autoShootSixFeet = new AutoShoot(0.2, -0.35);
     
 
@@ -209,7 +209,9 @@ public class RobotContainer {
     NamedCommands.registerCommand("Reverse", autonPath("Reverse"));
     NamedCommands.registerCommand("Go to balls", autonPath("Go to balls"));
     NamedCommands.registerCommand("Home Depot", autonPath("Home Depot"));
-
+    NamedCommands.registerCommand("Meter Test", autonPath("Meter Test"));
+    NamedCommands.registerCommand("Turn 180", autonPath("Turn 180"));
+    NamedCommands.registerCommand("Ball turn right", autonPath("Ball turn right"));
     //Path Planner Commands
     NamedCommands.registerCommand("AutoShootEightFeet", autoShootEightFeet);
     NamedCommands.registerCommand("AutoShootNineFeet", autoShootNineFeet);
@@ -275,10 +277,10 @@ public class RobotContainer {
     m_operatorController.button(5).onTrue(resetTurret);
 
 
-      m_commandXboxController.a().whileTrue(climbDown);
-      m_commandXboxController.b().whileTrue(climbUp);
+      m_commandXboxController.leftTrigger(0.8).whileTrue(climbDown);
+      m_commandXboxController.rightTrigger(0.8).whileTrue(climbUp);
 
-      m_operatorController.button(8).whileTrue(teleOpTurret);
+      //m_operatorController.button(8).whileTrue(teleOpTurret);
 
 
 
