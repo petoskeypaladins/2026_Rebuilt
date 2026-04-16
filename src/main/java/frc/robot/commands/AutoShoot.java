@@ -53,7 +53,7 @@ double tick = 0;
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    System.out.println("stopped");
+
     return tick > 1000;
     
   }

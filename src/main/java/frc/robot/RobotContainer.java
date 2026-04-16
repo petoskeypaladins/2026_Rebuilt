@@ -177,7 +177,7 @@ public class RobotContainer {
     public static final OuttakeCommand outtakeCommand = new OuttakeCommand();
     public static final ShooterTwo shooterTwo = new ShooterTwo();
     public static final ResetTurret resetTurret = new ResetTurret();
-    public static final ResetGyro resetGyro = new ResetGyro();
+    public static final ResetGyro resetGyro = new ResetGyro(0);
 
 
     
@@ -207,7 +207,7 @@ public class RobotContainer {
       //ZPaths 
     NamedCommands.registerCommand("Hello, World!", autonPath("Hello, World!"));
     NamedCommands.registerCommand("Reverse", autonPath("Reverse"));
-    NamedCommands.registerCommand("Go to balls", autonPath("Go to balls"));
+    NamedCommands.registerCommand("Go to balls depot", autonPath("Go to balls depot"));
     NamedCommands.registerCommand("Home Depot", autonPath("Home Depot"));
     NamedCommands.registerCommand("Meter Test", autonPath("Meter Test"));
     NamedCommands.registerCommand("Turn 180", autonPath("Turn 180"));

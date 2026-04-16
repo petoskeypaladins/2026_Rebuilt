@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 5.34,
-        "y": 7.17
+        "x": 5.661101123595506,
+        "y": 0.7005895439377081
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.385943820224719,
-        "y": 6.307595505617977
+        "x": 4.661101123595506,
+        "y": 0.7005895439377081
       },
       "isLocked": false,
-      "linkedName": "flipped after tunnel"
+      "linkedName": "In the wall"
     },
     {
       "anchor": {
-        "x": 5.447089887640448,
-        "y": 6.063011235955056
+        "x": 3.568531701890991,
+        "y": -0.056084538375973825
       },
       "prevControl": {
-        "x": 5.447089887640448,
-        "y": 6.953369741006099
+        "x": 4.568531701890992,
+        "y": -0.056084538375973936
       },
       "nextControl": null,
       "isLocked": false,
@@ -42,7 +42,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -90.0
+    "rotation": 0.0
   },
   "reversed": false,
   "folder": null,

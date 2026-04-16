@@ -246,9 +246,6 @@ public class DriveSubsystem extends SubsystemBase {
   }
 
   public void driveRobotRelative(ChassisSpeeds speeds) {
-          System.out.println("delivered y" + speeds.vyMetersPerSecond);
-      System.out.println("delivered x" + speeds.vxMetersPerSecond);
-      System.out.println("rot" + speeds.omegaRadiansPerSecond);
 
     var swerveModuleStates = 
       DriveConstants.kDriveKinematics.toSwerveModuleStates(speeds);

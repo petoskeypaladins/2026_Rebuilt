@@ -84,7 +84,7 @@ public class ShooterTwo extends Command {
   public void end(boolean interrupted) {
     RobotContainer.shooterSubsystem.shooterTop.set(0);
     RobotContainer.shooterSubsystem.shooterBottom.set(0);
-    System.out.println("interrupted");
+
   }
 
   // Returns true when the command should end.

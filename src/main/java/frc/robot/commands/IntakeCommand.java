@@ -23,7 +23,7 @@ public class IntakeCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      IntakeSubsystem.intakeSpeed = 0.8 ;
+      IntakeSubsystem.intakeSpeed = .95 ; // changed from 0.8 on 4-15-26
   }
 
   // Called once the command ends or is interrupted.

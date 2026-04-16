@@ -22,6 +22,9 @@ import frc.robot.subsystems.TurretSubsystem;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DriverStation;
+
+import static edu.wpi.first.units.Units.Rotation;
+
 import java.lang.String;
 import java.math.RoundingMode;
 
@@ -88,6 +91,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       CommandScheduler.getInstance().schedule(m_autonomousCommand);
 
+
       //  03-28-26: Commented out 83 and 84 to prevent unwanted movement when testing ramp precision
       // RobotContainer.TurretSubsystem.setDefaultCommand(new AutoTurretLeft());
       // RobotContainer.shooterSubsystem.setDefaultCommand(new AutoShoot());
@@ -114,51 +118,9 @@ public class Robot extends TimedRobot {
 
     
   }
-    //put the field info on the smartDashboard
-  // int timeRemaining;
-  // String shiftTimeRemaining;
-  // String gameData;
-  // boolean redActive; // true for red active, false for blue active
-  // int shiftID;
-  // boolean winnerActive;
+
   @Override
   public void teleopPeriodic() {
-  //   timeRemaining = (int) edu.wpi.first.wpilibj.Timer.getMatchTime();
-  //   gameData = DriverStation.getGameSpecificMessage();
-  //   if (gameData.length() != 0){ // catch null pointers in the game data
-  //     if (gameData.charAt(0) == 'R'){
-  //       redActive = true;
-  //     } else if (gameData.charAt(0) == 'B') {
-  //       redActive = false;
-  //     } else {
-  //       System.out.println("um... what?");
-  //     }
-  //   } else {
-  //   }
-  // SmartDashboard.putBoolean("Active alliance", redActive);
-  
-
-  //   if (timeRemaining != 0){ //check for null pointers in time remaining
-  //     if (timeRemaining > 140){
-  //       shiftTimeRemaining = "AUTO";
-  //       winnerActive = true;
-  //     } else if (timeRemaining > 135) {
-  //       shiftTimeRemaining = "TRANSITION";
-  //       winnerActive = true;
-  //     } else if (timeRemaining > 110){  
-  //       shiftTimeRemaining = String.valueOf(timeRemaining - 85);
-  //       winnerActive = false;
-  //     } else if (timeRemaining > 60){
-  //       shiftTimeRemaining = String.valueOf(timeRemaining - 35);
-  //     } else if (timeRemaining > 30) {
-  //       shiftTimeRemaining = "TRANSITION";
-  //       winnerActive = true;
-  //     } else {
-  //       shiftTimeRemaining = String.valueOf(timeRemaining);
-  //       winnerActive = true;
-  //     }
-
-  //   }
 
   }
 

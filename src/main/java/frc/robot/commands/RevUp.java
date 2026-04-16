@@ -26,7 +26,7 @@ public class RevUp extends Command {
   RobotContainer.shooterSubsystem.shooterBottom.set(-0.4);
   // RobotContainer.shooterSubsystem.spindexer.set(0.4);
   //  RobotContainer.shooterSubsystem.kicker.set(0.95);
-   System.out.println("revving...");
+
   }
 
   // Called once the command ends or is interrupted.

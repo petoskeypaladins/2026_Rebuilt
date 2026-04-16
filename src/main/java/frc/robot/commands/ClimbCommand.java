@@ -56,7 +56,7 @@
 //       //stopClimb();
 
 //     } else {
-//       System.out.println("uh-oh");
+
 //     }
 
 
@@ -68,81 +68,7 @@
 //   @SuppressWarnings("static-access")
 //   @Override
 
-//   public void end(boolean interrupted) {
-//     RobotContainer.climbSubsystem.climb.set(0);
-//   }
 
-//   // Returns true when the command should end.
-//   @Override
-//   public boolean isFinished() {
-//     return false;
-//   }
-
-//   @SuppressWarnings("static-access")
-//   public void raiseClimb() {
-//     if (RobotContainer.climbSubsystem.climb.getPosition().getValueAsDouble() < ClimbSubsystem.climbTop) {
-//       RobotContainer.climbSubsystem.climb.set(0.3);
-//       inbetweenState();
-//     } else {
-//       RobotContainer.climbSubsystem.climb.set(0);
-//       toggleState();
-//       cancel();
-//     }
-//   }
-
-//   @SuppressWarnings("static-access")
-//   public void lowerClimb() {
-//     if (!RobotContainer.climbBottomedOut) {
-//       RobotContainer.climbSubsystem.climb.set(-0.3);
-//       inbetweenState();
-//     } else {
-//       RobotContainer.climbSubsystem.climb.set(0);
-//       toggleState();
-//       cancel();
-//     }
-//   }
-
-//   public void toggleState() {
-//     if (RobotContainer.climbState == "up") {
-//       RobotContainer.climbState = "down";
-//     } else {
-//       RobotContainer.climbState = "up";
-//     }
-//   }
-
-//   @SuppressWarnings("static-access")
-//   public void inbetweenState() {
-//     if (RobotContainer.climbSubsystem.climb.get() >= 0.1){
-//       RobotContainer.climbState = "going up";
-//     }  
-//     else if (RobotContainer.climbSubsystem.climb.get() <= -0.1) {
-//       RobotContainer.climbState = "going down";
-
-//     } else {
-//       System.out.println("whoopsie");
-//     }
-//   }
-
-
-//     public void stoppedState() {
-//       if (RobotContainer.climbState == "going up") {
-//         RobotContainer.climbState = "stopped on the way up";
-//       }
-//       if (RobotContainer.climbState == "going down") {
-//         RobotContainer.climbState = "stopped on the way down";
-//       }
-//     }
-
-
-// @SuppressWarnings("static-access")
-// public void stopClimb() {
-//   RobotContainer.climbSubsystem.climb.set(0);
-//   stoppedState();
-//   cancel();
-// }
-
-
-// }
 
 //#endregion
 
@@ -198,7 +124,7 @@ public class ClimbCommand extends Command {
     } else if (RobotContainer.climbState == "down") {
       raiseClimb();
     } else {
-      System.out.println("uh-oh");
+
     }
 
     // RobotContainer.climbSubsystem.climb.set(0.1);
